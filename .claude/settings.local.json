@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git clone:*)",
+      "Bash(tree:*)",
+      "WebFetch(domain:app.aitour.co.uk)",
+      "Bash(cd:*)",
+      "Bash(cd /Volumes/X9\\\\ Pro/tototrip && npx create-next-app@latest v2 --typescript --tailwind --app --no-src-dir --import-alias \"@/*\" --turbopack:*)",
+      "Bash(npm run build)",
+      "Bash(open http://localhost:3000)",
+      "Bash(npm run dev:*)",
+      "Bash(npm install)",
+      "Bash(git init:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git rm:*)",
+      "Bash(npm install:*)",
+      "Bash(npm uninstall:*)",
+      "WebFetch(domain:www.mindtrip.ai)",
+      "Bash(open:*)",
+      "Bash(brew install:*)",
+      "Bash(pkill:*)",
+      "Bash(git remote add:*)",
+      "Bash(git push:*)",
+      "Bash(git config:*)",
+      "Bash(git remote set-url:*)",
+      "Bash(git rev-parse:*)",
+      "Bash(git filter-branch:*)"
+    ]
+  }
+}
