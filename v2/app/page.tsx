@@ -2,19 +2,56 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ArrowRight, MessageCircle, Map, Globe, Sparkles } from "lucide-react";
+import { ArrowRight, MessageCircle, Map, Globe, Sparkles, User } from "lucide-react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function Home() {
   const router = useRouter();
+  const { user, logout, session } = useAuth();
   const [destination, setDestination] = useState("");
+  const [isCreatingSession, setIsCreatingSession] = useState(false);
 
-  const handleStartChat = () => {
-    // For now, create a simple trip ID
-    const tripId = `trip-${Date.now()}`;
-    router.push(`/chat/${tripId}`);
+  const handleStartChat = async () => {
+    setIsCreatingSession(true);
+
+    try {
+      // If user is logged in, create a new session in the database
+      if (session?.access_token) {
+        const response = await fetch('/api/sessions', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${session.access_token}`,
+          },
+          body: JSON.stringify({
+            title: destination || 'New Chat',
+          }),
+        });
+
+        if (response.ok) {
+          const { session: newSession } = await response.json();
+          router.push(`/chat/${newSession.id}`);
+        } else {
+          // Fallback to temporary ID
+          const tempId = `temp-${Date.now()}`;
+          router.push(`/chat/${tempId}`);
+        }
+      } else {
+        // Not logged in, use temporary ID
+        const tempId = `temp-${Date.now()}`;
+        router.push(`/chat/${tempId}`);
+      }
+    } catch (error) {
+      console.error('Error creating session:', error);
+      // Fallback
+      const tempId = `temp-${Date.now()}`;
+      router.push(`/chat/${tempId}`);
+    } finally {
+      setIsCreatingSession(false);
+    }
   };
 
   return (
@@ -32,9 +69,23 @@ export default function Home() {
             <a href="#features" className="text-gray-600 hover:text-gray-900">Features</a>
             <a href="#how-it-works" className="text-gray-600 hover:text-gray-900">How it Works</a>
           </nav>
-          <Button variant="outline" onClick={handleStartChat}>
-            Get Started
-          </Button>
+          <div className="flex items-center gap-3">
+            {user ? (
+              <>
+                <div className="flex items-center gap-2 text-sm text-gray-700">
+                  <User className="h-4 w-4" />
+                  <span className="hidden md:inline">{user.fullName || user.email}</span>
+                </div>
+                <Button variant="outline" size="sm" onClick={() => logout()}>
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <Button variant="outline" onClick={() => router.push('/auth')}>
+                Login
+              </Button>
+            )}
+          </div>
         </div>
       </header>
 
@@ -73,9 +124,10 @@ export default function Home() {
               <Button
                 onClick={handleStartChat}
                 size="lg"
+                disabled={isCreatingSession}
                 className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
               >
-                Start Planning
+                {isCreatingSession ? 'Starting...' : 'Start Planning'}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </div>
