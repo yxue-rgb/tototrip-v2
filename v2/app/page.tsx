@@ -2,17 +2,50 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ArrowRight, MessageCircle, Map, Globe, Sparkles, User } from "lucide-react";
-import { useState } from "react";
+import { ArrowRight, MessageCircle, Map, Globe, Sparkles, User, History, MapPin, Plane } from "lucide-react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { useAuth } from "@/contexts/AuthContext";
+
+interface ChatSession {
+  id: string;
+  title: string;
+  created_at: string;
+  updated_at: string;
+}
 
 export default function Home() {
   const router = useRouter();
   const { user, logout, session } = useAuth();
   const [destination, setDestination] = useState("");
   const [isCreatingSession, setIsCreatingSession] = useState(false);
+  const [recentSessions, setRecentSessions] = useState<ChatSession[]>([]);
+
+  // Load recent sessions for logged-in users
+  useEffect(() => {
+    if (session?.access_token) {
+      loadRecentSessions();
+    }
+  }, [session]);
+
+  const loadRecentSessions = async () => {
+    try {
+      const response = await fetch('/api/sessions', {
+        headers: {
+          Authorization: `Bearer ${session?.access_token}`,
+        },
+      });
+
+      if (response.ok) {
+        const { sessions: sessionList } = await response.json();
+        // Show only the 5 most recent sessions
+        setRecentSessions(sessionList.slice(0, 5));
+      }
+    } catch (error) {
+      console.error('Error loading sessions:', error);
+    }
+  };
 
   const handleStartChat = async () => {
     setIsCreatingSession(true);
@@ -72,6 +105,24 @@ export default function Home() {
           <div className="flex items-center gap-3">
             {user ? (
               <>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => router.push('/trips')}
+                  className="hidden md:flex items-center gap-2"
+                >
+                  <Plane className="h-4 w-4" />
+                  My Trips
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => router.push('/locations')}
+                  className="hidden md:flex items-center gap-2"
+                >
+                  <MapPin className="h-4 w-4" />
+                  My Locations
+                </Button>
                 <div className="flex items-center gap-2 text-sm text-gray-700">
                   <User className="h-4 w-4" />
                   <span className="hidden md:inline">{user.fullName || user.email}</span>
@@ -150,6 +201,62 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+
+      {/* Recent Chats - Only show for logged-in users */}
+      {user && recentSessions.length > 0 && (
+        <section className="py-12 px-4 bg-gray-50 border-y">
+          <div className="container mx-auto max-w-6xl">
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-2">
+                <History className="h-5 w-5 text-gray-600" />
+                <h2 className="text-2xl font-bold">Recent Conversations</h2>
+              </div>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => {
+                  // Navigate to first session to show full list
+                  if (recentSessions.length > 0) {
+                    router.push(`/chat/${recentSessions[0].id}`);
+                  }
+                }}
+              >
+                View All
+              </Button>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {recentSessions.map((sess) => (
+                <motion.div
+                  key={sess.id}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="p-4 bg-white rounded-lg border hover:border-blue-300 hover:shadow-md transition-all cursor-pointer"
+                  onClick={() => router.push(`/chat/${sess.id}`)}
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <MessageCircle className="h-5 w-5 text-blue-600" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-medium text-gray-900 truncate mb-1">
+                        {sess.title}
+                      </h3>
+                      <p className="text-xs text-gray-500">
+                        {new Date(sess.updated_at).toLocaleDateString('en-US', {
+                          month: 'short',
+                          day: 'numeric',
+                          hour: '2-digit',
+                          minute: '2-digit'
+                        })}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Features */}
       <section id="features" className="py-20 px-4 bg-white">

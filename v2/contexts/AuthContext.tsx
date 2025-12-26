@@ -81,19 +81,35 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signup = async (data: SignupData) => {
     try {
-      const response = await fetch('/api/auth/signup', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+      // Use Supabase client directly for signup
+      const { data: authData, error } = await supabase.auth.signUp({
+        email: data.email,
+        password: data.password,
+        options: {
+          data: {
+            full_name: data.fullName || '',
+          },
+        },
       });
 
-      const result = await response.json();
-
-      if (!response.ok) {
-        return { success: false, error: result.error };
+      if (error) {
+        console.error('Signup error:', error);
+        return { success: false, error: error.message || 'Failed to create account' };
       }
 
-      return { success: true, message: result.message };
+      if (!authData.user) {
+        return { success: false, error: 'Signup failed' };
+      }
+
+      // Check if email confirmation is required
+      if (authData.user && !authData.session) {
+        return {
+          success: true,
+          message: 'Account created! Please check your email to confirm your account.',
+        };
+      }
+
+      return { success: true, message: 'Account created successfully!' };
     } catch (error) {
       console.error('Signup error:', error);
       return { success: false, error: 'Failed to create account' };
@@ -102,19 +118,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const login = async (data: LoginData) => {
     try {
-      const response = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+      // Use Supabase client directly for login to ensure session is saved
+      const { data: authData, error } = await supabase.auth.signInWithPassword({
+        email: data.email,
+        password: data.password,
       });
 
-      const result = await response.json();
+      if (error) {
+        console.error('Login error:', error);
+        return { success: false, error: error.message || 'Invalid email or password' };
+      }
 
-      if (!response.ok) {
-        return { success: false, error: result.error };
+      if (!authData.user) {
+        return { success: false, error: 'Login failed' };
       }
 
       // Session will be updated via onAuthStateChange listener
+      // and Supabase automatically stores it in localStorage
       return { success: true };
     } catch (error) {
       console.error('Login error:', error);

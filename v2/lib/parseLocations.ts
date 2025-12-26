@@ -52,20 +52,31 @@ export function parseLocationsFromMessage(content: string): {
         // Try parsing with JSON5 first (handles trailing commas, etc.)
         const data = JSON5.parse(jsonStr);
 
+        let locationArray: Location[] = [];
+
+        // Handle both formats:
+        // 1. { locations: [...] } format
+        // 2. Direct array [...] format
         if (data.locations && Array.isArray(data.locations)) {
+          locationArray = data.locations;
+        } else if (Array.isArray(data)) {
+          locationArray = data;
+        }
+
+        if (locationArray.length > 0) {
           // Ensure unique IDs for each location
-          const locationsWithUniqueIds = data.locations.map((loc: Location, index: number) => ({
+          const locationsWithUniqueIds = locationArray.map((loc: Location, index: number) => ({
             ...loc,
             id: loc.id || `location-${Date.now()}-${index}`,
           }));
           locations.push(...locationsWithUniqueIds);
           // Remove the JSON block from the text
           cleanedText = cleanedText.replace(match[0], '');
-          console.log(`✅ Successfully parsed ${data.locations.length} locations`);
+          console.log(`✅ Successfully parsed ${locationArray.length} locations`);
         }
       } catch (e) {
         // Silently skip incomplete or malformed JSON
-        console.log('⚠️ Skipping incomplete/malformed JSON block');
+        console.log('⚠️ Skipping incomplete/malformed JSON block:', e);
       }
     }
   } catch (error) {

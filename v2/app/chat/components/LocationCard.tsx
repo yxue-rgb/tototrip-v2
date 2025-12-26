@@ -1,19 +1,41 @@
 "use client";
 
 import { Location } from "@/lib/types";
-import { MapPin, Star, Clock, DollarSign, ExternalLink } from "lucide-react";
+import { MapPin, Star, Clock, DollarSign, ExternalLink, Bookmark } from "lucide-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { useState } from "react";
 
 interface LocationCardProps {
   location: Location;
   onClick?: () => void;
+  onSave?: (location: Location) => Promise<void>;
+  showSaveButton?: boolean;
 }
 
-export function LocationCard({ location, onClick }: LocationCardProps) {
+export function LocationCard({ location, onClick, onSave, showSaveButton = false }: LocationCardProps) {
+  const [isSaving, setIsSaving] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
+
   const priceSymbols = location.priceLevel
     ? "$".repeat(location.priceLevel)
     : null;
+
+  const handleSave = async (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent card click
+    if (isSaved || !onSave) return;
+
+    setIsSaving(true);
+    try {
+      await onSave(location);
+      setIsSaved(true);
+    } catch (error) {
+      console.error('Failed to save location:', error);
+    } finally {
+      setIsSaving(false);
+    }
+  };
 
   return (
     <motion.div
@@ -39,14 +61,29 @@ export function LocationCard({ location, onClick }: LocationCardProps) {
 
       {/* Content */}
       <div className="p-4">
-        {/* Title and Category */}
-        <div className="flex items-start justify-between mb-2">
+        {/* Title, Category, and Save Button */}
+        <div className="flex items-start justify-between mb-2 gap-2">
           <h3 className="font-semibold text-lg text-gray-900 flex-1">
             {location.name}
           </h3>
-          <span className="text-xs px-2 py-1 bg-blue-100 text-blue-700 rounded-full ml-2 whitespace-nowrap">
-            {location.category}
-          </span>
+          <div className="flex items-center gap-2">
+            <span className="text-xs px-2 py-1 bg-blue-100 text-blue-700 rounded-full whitespace-nowrap">
+              {location.category}
+            </span>
+            {showSaveButton && (
+              <Button
+                variant={isSaved ? "default" : "outline"}
+                size="sm"
+                onClick={handleSave}
+                disabled={isSaving || isSaved}
+                className="h-8 w-8 p-0"
+              >
+                <Bookmark
+                  className={`h-4 w-4 ${isSaved ? 'fill-current' : ''}`}
+                />
+              </Button>
+            )}
+          </div>
         </div>
 
         {/* Description */}
@@ -120,9 +157,11 @@ export function LocationCard({ location, onClick }: LocationCardProps) {
   );
 }
 
-export function LocationsGrid({ locations, onLocationClick }: {
+export function LocationsGrid({ locations, onLocationClick, onSave, showSaveButton }: {
   locations: Location[];
   onLocationClick?: (location: Location) => void;
+  onSave?: (location: Location) => Promise<void>;
+  showSaveButton?: boolean;
 }) {
   if (!locations || locations.length === 0) return null;
 
@@ -133,6 +172,8 @@ export function LocationsGrid({ locations, onLocationClick }: {
           key={location.id}
           location={location}
           onClick={() => onLocationClick?.(location)}
+          onSave={onSave}
+          showSaveButton={showSaveButton}
         />
       ))}
     </div>

@@ -3,10 +3,14 @@
 import { useState, useCallback, useEffect } from "react";
 import { MessageList, type Message } from "../components/MessageList";
 import { MessageInput } from "../components/MessageInput";
+import { SessionList } from "../components/SessionList";
+import { SaveLocationDialog } from "../components/SaveLocationDialog";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Sparkles, Loader2 } from "lucide-react";
+import { ArrowLeft, Sparkles, Loader2, MapPin } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
+import { Location } from "@/lib/types";
+import { toast } from "sonner";
 
 export default function ChatPage({ params }: { params: Promise<{ id: string }> }) {
   const router = useRouter();
@@ -15,6 +19,8 @@ export default function ChatPage({ params }: { params: Promise<{ id: string }> }
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingHistory, setIsLoadingHistory] = useState(true);
+  const [locationToSave, setLocationToSave] = useState<Location | null>(null);
+  const [showSaveDialog, setShowSaveDialog] = useState(false);
 
   // Unwrap params Promise and load session
   useEffect(() => {
@@ -48,7 +54,15 @@ export default function ChatPage({ params }: { params: Promise<{ id: string }> }
       });
 
       if (response.ok) {
-        const { messages: dbMessages } = await response.json();
+        const data = await response.json();
+        const { messages: dbMessages } = data;
+
+        console.log('Loaded chat history:', {
+          sessionId: id,
+          messagesCount: dbMessages?.length || 0,
+          messages: dbMessages
+        });
+
         if (dbMessages && dbMessages.length > 0) {
           setMessages(dbMessages.map((msg: any) => ({
             role: msg.role,
@@ -57,6 +71,7 @@ export default function ChatPage({ params }: { params: Promise<{ id: string }> }
           })));
         } else {
           // No messages yet, show welcome message
+          console.log('No messages found, showing welcome message');
           setMessages([{
             role: "assistant",
             content: "Hi! I'm your AI travel companion for China. 👋\n\nI can help you with:\n- **Planning** your itinerary\n- **Translating** menus and signs\n- **Understanding** Chinese culture and customs\n- **Finding** the best places to eat and visit\n- **Navigating** transportation and payments\n\nWhat would you like to know?"
@@ -103,11 +118,168 @@ export default function ChatPage({ params }: { params: Promise<{ id: string }> }
     }
   }, [session, sessionId]);
 
+  // Open save location dialog
+  const handleSaveLocation = useCallback(async (location: Location) => {
+    if (!session?.access_token) {
+      toast.error('Please login to save locations');
+      return;
+    }
+
+    setLocationToSave(location);
+    setShowSaveDialog(true);
+  }, [session]);
+
+  // Actually save location to database (and optionally add to trip)
+  const handleConfirmSaveLocation = useCallback(async (
+    location: Location,
+    tripId?: string,
+    visitDate?: string
+  ) => {
+    if (!session?.access_token) {
+      toast.error('Please login to save locations');
+      return;
+    }
+
+    try {
+      // First, save the location
+      const response = await fetch('/api/locations', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${session.access_token}`,
+        },
+        body: JSON.stringify({
+          name: location.name,
+          description: location.description,
+          category: location.category,
+          address: location.address,
+          city: location.city,
+          latitude: location.latitude,
+          longitude: location.longitude,
+          rating: location.rating,
+          reviewCount: location.reviewCount,
+          priceLevel: location.priceLevel,
+          estimatedCost: location.estimatedCost,
+          currency: location.currency,
+          visitDuration: location.visitDuration,
+          bestTimeToVisit: location.bestTimeToVisit,
+          openingHours: location.openingHours,
+          imageUrl: location.imageUrl,
+          images: location.images,
+          websiteUrl: location.websiteUrl,
+          bookingUrl: location.bookingUrl,
+          phone: location.phone,
+          tags: location.tags,
+          amapId: location.amapId,
+          googlePlaceId: location.googlePlaceId,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        if (data.error === 'Location already saved') {
+          toast.info('Location already saved');
+          // Still try to add to trip if requested
+          if (tripId && data.location?.id) {
+            await addLocationToTrip(data.location.id, tripId, visitDate);
+          }
+        } else {
+          throw new Error(data.error || 'Failed to save location');
+        }
+        return;
+      }
+
+      // If user wants to add to trip, do that now
+      if (tripId && data.location?.id) {
+        await addLocationToTrip(data.location.id, tripId, visitDate);
+        toast.success('Location saved and added to trip!');
+      } else {
+        toast.success('Location saved successfully!');
+      }
+    } catch (error) {
+      console.error('Error saving location:', error);
+      toast.error('Failed to save location');
+      throw error;
+    }
+  }, [session]);
+
+  // Add location to trip
+  const addLocationToTrip = async (
+    locationId: string,
+    tripId: string,
+    visitDate?: string
+  ) => {
+    if (!session?.access_token) return;
+
+    try {
+      const response = await fetch(`/api/trips/${tripId}/locations`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${session.access_token}`,
+        },
+        body: JSON.stringify({
+          locationId,
+          visitDate: visitDate || null,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to add location to trip');
+      }
+    } catch (error) {
+      console.error('Error adding location to trip:', error);
+      toast.error('Failed to add location to trip');
+      throw error;
+    }
+  };
+
+  // Generate session title from first message
+  const generateSessionTitle = useCallback(async (firstMessage: string) => {
+    try {
+      // Create a concise title from the first message
+      let title = firstMessage.trim();
+
+      // Remove question marks and clean up
+      title = title.replace(/[?？]/g, '');
+
+      // Limit to first 40 characters
+      if (title.length > 40) {
+        title = title.substring(0, 40) + '...';
+      }
+
+      // If title is empty, use default
+      if (!title) {
+        title = 'New Conversation';
+      }
+
+      // Update session title in database
+      const response = await fetch(`/api/sessions/${sessionId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${session?.access_token}`,
+        },
+        body: JSON.stringify({ title }),
+      });
+
+      if (response.ok) {
+        console.log('Session title updated:', title);
+      }
+    } catch (error) {
+      console.error('Error generating session title:', error);
+    }
+  }, [session, sessionId]);
+
   const handleSendMessage = useCallback(async (content: string) => {
     // Add user message
     const userMessage: Message = { role: "user", content };
     setMessages((prev) => [...prev, userMessage]);
     setIsLoading(true);
+
+    // Check if this is the first user message (for auto-generating title)
+    const isFirstMessage = messages.length === 1 && messages[0].role === 'assistant';
 
     // Save user message to database
     await saveMessage('user', content);
@@ -160,12 +332,13 @@ export default function ChatPage({ params }: { params: Promise<{ id: string }> }
               const parsed = JSON.parse(data);
               if (parsed.text) {
                 assistantMessage += parsed.text;
-                // Update the last message
+                // Update the last message with both content and locations
                 setMessages((prev) => {
                   const newMessages = [...prev];
                   newMessages[newMessages.length - 1] = {
                     role: "assistant",
                     content: assistantMessage,
+                    locations: assistantLocations || undefined,
                   };
                   return newMessages;
                 });
@@ -173,6 +346,16 @@ export default function ChatPage({ params }: { params: Promise<{ id: string }> }
               // Store locations if present
               if (parsed.locations) {
                 assistantLocations = parsed.locations;
+                // Update message with new locations
+                setMessages((prev) => {
+                  const newMessages = [...prev];
+                  newMessages[newMessages.length - 1] = {
+                    role: "assistant",
+                    content: assistantMessage,
+                    locations: assistantLocations,
+                  };
+                  return newMessages;
+                });
               }
             } catch (e) {
               // Ignore parsing errors
@@ -183,6 +366,11 @@ export default function ChatPage({ params }: { params: Promise<{ id: string }> }
 
       // Save assistant message to database after streaming is complete
       await saveMessage('assistant', assistantMessage, assistantLocations);
+
+      // Auto-generate title for first message
+      if (isFirstMessage && session?.access_token && sessionId) {
+        await generateSessionTitle(content);
+      }
     } catch (error) {
       console.error("Error sending message:", error);
       setMessages((prev) => [
@@ -214,58 +402,93 @@ export default function ChatPage({ params }: { params: Promise<{ id: string }> }
   }
 
   return (
-    <div className="h-screen flex flex-col bg-gray-50">
-      {/* Header */}
-      <div className="bg-white border-b px-4 py-3 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => router.push("/")}
-          >
-            <ArrowLeft className="h-5 w-5" />
-          </Button>
-          <div>
-            <h1 className="font-semibold">AI Travel Companion</h1>
-            <p className="text-xs text-gray-500">{user ? `Chat saved automatically` : 'Sign in to save chats'}</p>
-          </div>
-        </div>
-        <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-      </div>
+    <div className="h-screen flex bg-gray-50">
+      {/* Session List Sidebar - only show if user is logged in */}
+      {user && <SessionList currentSessionId={sessionId} />}
 
-      {/* Quick Actions */}
-      {messages.length === 1 && (
-        <div className="bg-white border-b px-4 py-3">
-          <div className="max-w-3xl mx-auto">
-            <p className="text-sm text-gray-600 mb-2">Quick actions:</p>
-            <div className="flex flex-wrap gap-2">
-              {[
-                "Plan a 3-day trip to Beijing",
-                "How do I use Alipay?",
-                "Recommend local food in Shanghai",
-                "Translate common phrases",
-              ].map((action, i) => (
-                <Button
-                  key={i}
-                  variant="outline"
-                  size="sm"
-                  onClick={() => handleQuickAction(action)}
-                  className="text-xs"
-                >
-                  <Sparkles className="h-3 w-3 mr-1" />
-                  {action}
-                </Button>
-              ))}
+      {/* Main Chat Area */}
+      <div className="flex-1 flex flex-col">
+        {/* Header */}
+        <div className="bg-white border-b px-4 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => router.push("/")}
+            >
+              <ArrowLeft className="h-5 w-5" />
+            </Button>
+            <div>
+              <h1 className="font-semibold">AI Travel Companion</h1>
+              <p className="text-xs text-gray-500">{user ? `Chat saved automatically` : 'Sign in to save chats'}</p>
             </div>
           </div>
+          <div className="flex items-center gap-3">
+            {user && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => router.push('/locations')}
+                className="hidden md:flex items-center gap-2"
+              >
+                <MapPin className="h-4 w-4" />
+                My Locations
+              </Button>
+            )}
+            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+          </div>
         </div>
-      )}
 
-      {/* Messages */}
-      <MessageList messages={messages} isLoading={isLoading} />
+        {/* Quick Actions */}
+        {messages.length === 1 && (
+          <div className="bg-white border-b px-4 py-3">
+            <div className="max-w-3xl mx-auto">
+              <p className="text-sm text-gray-600 mb-2">Quick actions:</p>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  "Plan a 3-day trip to Beijing",
+                  "How do I use Alipay?",
+                  "Recommend local food in Shanghai",
+                  "Translate common phrases",
+                ].map((action, i) => (
+                  <Button
+                    key={i}
+                    variant="outline"
+                    size="sm"
+                    onClick={() => handleQuickAction(action)}
+                    className="text-xs"
+                  >
+                    <Sparkles className="h-3 w-3 mr-1" />
+                    {action}
+                  </Button>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
 
-      {/* Input */}
-      <MessageInput onSend={handleSendMessage} disabled={isLoading} />
+        {/* Messages */}
+        <MessageList
+          messages={messages}
+          isLoading={isLoading}
+          onSaveLocation={handleSaveLocation}
+        />
+
+        {/* Input */}
+        <MessageInput onSend={handleSendMessage} disabled={isLoading} />
+      </div>
+
+      {/* Save Location Dialog */}
+      <SaveLocationDialog
+        location={locationToSave}
+        isOpen={showSaveDialog}
+        onClose={() => {
+          setShowSaveDialog(false);
+          setLocationToSave(null);
+        }}
+        onSave={handleConfirmSaveLocation}
+        sessionToken={session?.access_token}
+      />
     </div>
   );
 }

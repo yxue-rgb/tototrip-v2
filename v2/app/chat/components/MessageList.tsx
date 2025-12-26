@@ -19,9 +19,10 @@ export type Message = {
 type MessageListProps = {
   messages: Message[];
   isLoading?: boolean;
+  onSaveLocation?: (location: Location) => Promise<void>;
 };
 
-export function MessageList({ messages, isLoading }: MessageListProps) {
+export function MessageList({ messages, isLoading, onSaveLocation }: MessageListProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -34,7 +35,7 @@ export function MessageList({ messages, isLoading }: MessageListProps) {
     <ScrollArea className="flex-1 p-4" viewportRef={scrollRef}>
       <div className="max-w-3xl mx-auto space-y-4">
         {messages.map((message, index) => (
-          <MessageBubble key={index} message={message} />
+          <MessageBubble key={index} message={message} onSaveLocation={onSaveLocation} />
         ))}
         {isLoading && <TypingIndicator />}
       </div>
@@ -42,7 +43,7 @@ export function MessageList({ messages, isLoading }: MessageListProps) {
   );
 }
 
-function MessageBubble({ message }: { message: Message }) {
+function MessageBubble({ message, onSaveLocation }: { message: Message; onSaveLocation?: (location: Location) => Promise<void> }) {
   const isUser = message.role === "user";
 
   // Parse locations from AI messages with error handling
@@ -92,7 +93,11 @@ function MessageBubble({ message }: { message: Message }) {
       {/* Display location cards and map if present */}
       {!isUser && locations.length > 0 && (
         <div className="w-full max-w-4xl space-y-4">
-          <LocationsGrid locations={locations} />
+          <LocationsGrid
+            locations={locations}
+            onSave={onSaveLocation}
+            showSaveButton={!!onSaveLocation}
+          />
           <LocationMap locations={locations} height="300px" />
         </div>
       )}
