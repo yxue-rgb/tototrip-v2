@@ -312,7 +312,7 @@ export default function ChatPage({ params }: { params: Promise<{ id: string }> }
       }
 
       let assistantMessage = "";
-      let assistantLocations: Location[] | null = null;
+      let assistantLocations: Location[] | undefined = undefined;
 
       // Add empty assistant message that we'll update
       setMessages((prev) => [...prev, { role: "assistant", content: "" }]);
@@ -340,7 +340,7 @@ export default function ChatPage({ params }: { params: Promise<{ id: string }> }
                   newMessages[newMessages.length - 1] = {
                     role: "assistant",
                     content: assistantMessage,
-                    locations: assistantLocations || undefined,
+                    locations: assistantLocations,
                   };
                   return newMessages;
                 });
