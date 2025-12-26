@@ -27,8 +27,9 @@ export interface Location {
 
   // Additional info
   openingHours?: string;
-  website?: string;
-  phoneNumber?: string;
+  websiteUrl?: string;
+  bookingUrl?: string;
+  phone?: string;
   tags?: string[];
 
   // Travel info
