@@ -27,7 +27,9 @@
       "Bash(git rev-parse:*)",
       "Bash(git filter-branch:*)",
       "Bash(grep:*)",
-      "Bash(git restore:*)"
+      "Bash(git restore:*)",
+      "Bash(cat:*)",
+      "Bash(env)"
     ]
   }
 }

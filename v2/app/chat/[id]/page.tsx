@@ -21,6 +21,7 @@ export default function ChatPage({ params }: { params: Promise<{ id: string }> }
   const [isLoadingHistory, setIsLoadingHistory] = useState(true);
   const [locationToSave, setLocationToSave] = useState<Location | null>(null);
   const [showSaveDialog, setShowSaveDialog] = useState(false);
+  const [aiProvider, setAiProvider] = useState<"auto" | "deepseek" | "groq" | "claude">("auto");
 
   // Unwrap params Promise and load session
   useEffect(() => {
@@ -295,6 +296,7 @@ export default function ChatPage({ params }: { params: Promise<{ id: string }> }
             destination: "China",
             sessionId: sessionId,
           },
+          aiProvider: aiProvider, // Send selected AI provider
         }),
       });
 
@@ -475,7 +477,12 @@ export default function ChatPage({ params }: { params: Promise<{ id: string }> }
         />
 
         {/* Input */}
-        <MessageInput onSend={handleSendMessage} disabled={isLoading} />
+        <MessageInput
+          onSend={handleSendMessage}
+          disabled={isLoading}
+          aiProvider={aiProvider}
+          onAiProviderChange={setAiProvider}
+        />
       </div>
 
       {/* Save Location Dialog */}

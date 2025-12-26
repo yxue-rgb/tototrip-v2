@@ -8,6 +8,7 @@ import { User, AuthState, SignupData, LoginData, UpdateProfileData } from '@/lib
 interface AuthContextType extends AuthState {
   signup: (data: SignupData) => Promise<{ success: boolean; error?: string; message?: string }>;
   login: (data: LoginData) => Promise<{ success: boolean; error?: string }>;
+  loginWithGoogle: () => Promise<{ success: boolean; error?: string }>;
   logout: () => Promise<void>;
   updateProfile: (data: UpdateProfileData) => Promise<{ success: boolean; error?: string }>;
   refreshUser: () => Promise<void>;
@@ -142,6 +143,28 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const loginWithGoogle = async () => {
+    try {
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/auth/callback`,
+        },
+      });
+
+      if (error) {
+        console.error('Google login error:', error);
+        return { success: false, error: error.message || 'Failed to login with Google' };
+      }
+
+      // OAuth login will redirect, so we return success here
+      return { success: true };
+    } catch (error) {
+      console.error('Google login error:', error);
+      return { success: false, error: 'Failed to login with Google' };
+    }
+  };
+
   const logout = async () => {
     try {
       await fetch('/api/auth/logout', { method: 'POST' });
@@ -197,6 +220,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         loading,
         signup,
         login,
+        loginWithGoogle,
         logout,
         updateProfile,
         refreshUser,
