@@ -135,15 +135,10 @@ export async function POST(req: NextRequest) {
     } catch (error) {
       console.error(`Primary provider (${primaryProvider}) failed, trying fallback:`, error);
 
-      // Try fallback provider
+      // Try fallback provider (always OpenAI-compatible: deepseek or groq)
       try {
-        if (fallbackProvider === 'claude') {
-          stream = await streamClaude(messages, systemPrompt);
-          isClaude = true;
-        } else {
-          stream = await streamOpenAICompatible(fallbackProvider, messages, systemPrompt);
-          isClaude = false;
-        }
+        stream = await streamOpenAICompatible(fallbackProvider, messages, systemPrompt);
+        isClaude = false;
         usedProvider = fallbackProvider;
       } catch (fallbackError) {
         console.error(`Fallback provider (${fallbackProvider}) also failed:`, fallbackError);
