@@ -35,6 +35,10 @@ export interface Location {
   // Travel info
   visitDuration?: string; // e.g., "2-3 hours"
   bestTimeToVisit?: string;
+
+  // External IDs (for syncing with APIs)
+  amapId?: string;
+  googlePlaceId?: string;
 }
 
 export interface TripItinerary {
