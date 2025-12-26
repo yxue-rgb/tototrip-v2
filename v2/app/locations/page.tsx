@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
@@ -42,7 +42,7 @@ interface Trip {
   destination_country: string;
 }
 
-export default function LocationsPage() {
+function LocationsPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { session, user } = useAuth();
@@ -411,5 +411,17 @@ export default function LocationsPage() {
         </DialogContent>
       </Dialog>
     </div>
+  );
+}
+
+export default function LocationsPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex items-center justify-center min-h-screen">
+        <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
+      </div>
+    }>
+      <LocationsPageContent />
+    </Suspense>
   );
 }
