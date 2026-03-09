@@ -6,6 +6,7 @@ import type { CityData, Attraction, Food, TransportOption, QuickFact } from "@/l
 import { useI18n } from "@/contexts/I18nContext";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageToggle } from "@/components/LanguageToggle";
+import { SharedFooter } from "@/components/SharedFooter";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -536,20 +537,7 @@ export default function CityDestinationPage() {
         </div>
       </section>
 
-      {/* ─── Footer ─── */}
-      <footer className="py-12 px-4 bg-[#083022] border-t border-white/5">
-        <div className="container mx-auto max-w-6xl">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-2.5">
-              <Image src="/brand/toto_logo_plain_light.png" alt="toto" width={72} height={24} className="h-6 w-auto" />
-              <span className="text-[10px] text-white/40 font-subtitle">THE SMART TRAVEL GUIDE</span>
-            </div>
-            <p className="text-sm text-white/30">
-              &copy; {new Date().getFullYear()} {t("footer.copyright")}
-            </p>
-          </div>
-        </div>
-      </footer>
+      <SharedFooter />
     </div>
   );
 }

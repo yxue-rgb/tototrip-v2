@@ -7,6 +7,8 @@ import { ChevronDown, ArrowLeft, MessageCircle, Search } from "lucide-react";
 import { useI18n } from "@/contexts/I18nContext";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageToggle } from "@/components/LanguageToggle";
+import { SharedNavbar } from "@/components/SharedNavbar";
+import { SharedFooter } from "@/components/SharedFooter";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface FAQ {
@@ -276,22 +278,9 @@ export default function FAQPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#f0f7f4] to-white dark:from-[#060e0a] dark:to-[#0a1a14]">
-      {/* Minimal header */}
-      <header className="sticky top-0 z-40 backdrop-blur-xl bg-white/80 dark:bg-[#0a1a14]/80 border-b border-[#083022]/5 dark:border-white/5">
-        <div className="container mx-auto max-w-4xl px-4 h-14 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 text-[#083022]/60 dark:text-white/60 hover:text-[#083022] dark:hover:text-white transition-colors">
-            <ArrowLeft className="w-4 h-4" />
-            <Image src="/brand/toto_logo_plain_light.png" alt="toto" width={60} height={20} className="h-5 w-auto dark:hidden" />
-            <Image src="/brand/toto_logo_plain_light.png" alt="toto" width={60} height={20} className="h-5 w-auto hidden dark:block brightness-200" />
-          </Link>
-          <div className="flex items-center gap-2">
-            <LanguageToggle />
-            <ThemeToggle />
-          </div>
-        </div>
-      </header>
+      <SharedNavbar />
 
-      <main className="container mx-auto max-w-4xl px-4 py-16 md:py-24">
+      <main className="container mx-auto max-w-4xl px-4 pt-24 md:pt-28 pb-16 md:pb-24">
         {/* Hero */}
         <div className="text-center mb-12 md:mb-16">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-[#6BBFAC]/10 text-[#6BBFAC] mb-6">
@@ -373,6 +362,7 @@ export default function FAQPage() {
           </div>
         </div>
       </main>
+      <SharedFooter />
     </div>
   );
 }

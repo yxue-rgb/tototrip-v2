@@ -333,7 +333,15 @@ export default function ChatPage({ params }: { params: Promise<{ id: string }> }
     }
   }, [session, sessionId]);
 
+  // Guard against concurrent sends (e.g. double-click, stale closure re-invocation)
+  const isSendingRef = useRef(false);
+
   const handleSendMessage = useCallback(async (content: string) => {
+    // Prevent double invocation — fixes duplicate AI replies (P0 #3) and
+    // permanent disabled input (P0 #1) caused by concurrent sends.
+    if (isSendingRef.current) return;
+    isSendingRef.current = true;
+
     trackEvent('chat_message_sent');
     const now = Date.now();
     const userMessage: Message = { role: "user", content, timestamp: now };
@@ -382,17 +390,29 @@ export default function ChatPage({ params }: { params: Promise<{ id: string }> }
 
       setMessages((prev) => [...prev, { role: "assistant", content: "", timestamp: assistantTimestamp }]);
 
+      // SSE line buffer — TCP chunks don't align with SSE event boundaries.
+      // A large JSON payload (like locations) can arrive split across multiple
+      // reader.read() calls, so we must buffer partial lines.
+      let sseBuffer = "";
+
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
 
-        const chunk = decoder.decode(value);
-        const lines = chunk.split("\n");
+        // Append decoded chunk to buffer (stream: true handles multi-byte chars)
+        sseBuffer += decoder.decode(value, { stream: true });
+
+        // Process all complete lines (terminated by \n)
+        const lines = sseBuffer.split("\n");
+        // Last element may be incomplete — keep it in the buffer
+        sseBuffer = lines.pop() || "";
 
         for (const line of lines) {
-          if (line.startsWith("data: ")) {
-            const data = line.slice(6);
-            if (data === "[DONE]") break;
+          const trimmed = line.trim();
+          if (!trimmed) continue; // skip empty lines between SSE events
+          if (trimmed.startsWith("data: ")) {
+            const data = trimmed.slice(6);
+            if (data === "[DONE]") continue;
             try {
               const parsed = JSON.parse(data);
               if (parsed.text) {
@@ -409,7 +429,7 @@ export default function ChatPage({ params }: { params: Promise<{ id: string }> }
                 });
               }
               if (parsed.locations) {
-                console.log('🗺️ LOCATIONS RECEIVED:', parsed.locations.length, parsed.locations);
+                console.log('🗺️ LOCATIONS RECEIVED via SSE:', parsed.locations.length, parsed.locations);
                 assistantLocations = parsed.locations;
                 setMessages((prev) => {
                   const newMessages = [...prev];
@@ -421,12 +441,63 @@ export default function ChatPage({ params }: { params: Promise<{ id: string }> }
                   };
                   return newMessages;
                 });
-                // Trigger map fly-to when new locations arrive
                 setFlyToTrigger((prev) => prev + 1);
               }
-            } catch (e) {}
+            } catch (e) {
+              // JSON parse failed — this should not happen with proper buffering,
+              // but log it for debugging just in case
+              console.warn('🗺️ SSE JSON parse error:', (e as Error).message, 'data:', data.slice(0, 200));
+            }
           }
         }
+      }
+
+      // Process any remaining data in buffer after stream ends
+      if (sseBuffer.trim()) {
+        const remaining = sseBuffer.trim();
+        if (remaining.startsWith("data: ")) {
+          const data = remaining.slice(6);
+          if (data !== "[DONE]") {
+            try {
+              const parsed = JSON.parse(data);
+              if (parsed.locations) {
+                console.log('🗺️ LOCATIONS RECEIVED via buffer flush:', parsed.locations.length);
+                assistantLocations = parsed.locations;
+              }
+            } catch (e) {
+              console.warn('🗺️ Final buffer parse error:', (e as Error).message);
+            }
+          }
+        }
+      }
+
+      // Belt-and-suspenders: if SSE locations event was missed for any reason,
+      // extract locations client-side from the accumulated message text
+      if (!assistantLocations || assistantLocations.length === 0) {
+        try {
+          const { locations: clientParsed } = parseLocationsFromMessage(assistantMessage);
+          if (clientParsed.length > 0) {
+            console.log('🗺️ LOCATIONS RECOVERED via client-side parse:', clientParsed.length, clientParsed.map(l => l.name));
+            assistantLocations = clientParsed;
+          }
+        } catch (e) {
+          console.warn('🗺️ Client-side location parse failed:', e);
+        }
+      }
+
+      // Final state update with complete message + locations
+      setMessages((prev) => {
+        const newMessages = [...prev];
+        newMessages[newMessages.length - 1] = {
+          role: "assistant",
+          content: assistantMessage,
+          locations: assistantLocations,
+          timestamp: assistantTimestamp,
+        };
+        return newMessages;
+      });
+      if (assistantLocations && assistantLocations.length > 0) {
+        setFlyToTrigger((prev) => prev + 1);
       }
 
       await saveMessage('assistant', assistantMessage, assistantLocations);
@@ -449,12 +520,21 @@ export default function ChatPage({ params }: { params: Promise<{ id: string }> }
         errorMsg = "Woof, I hit a bump! 🐕 The AI service is temporarily unavailable. Tap the retry button below to try again.";
       }
 
-      setMessages((prev) => [
-        ...prev,
-        { role: "assistant", content: errorMsg, timestamp: Date.now() },
-      ]);
+      setMessages((prev) => {
+        const newMessages = [...prev];
+        // If a blank assistant placeholder was already appended, replace it
+        // instead of pushing yet another message (prevents ghost double-reply).
+        const last = newMessages[newMessages.length - 1];
+        if (last && last.role === "assistant" && !last.content) {
+          newMessages[newMessages.length - 1] = { role: "assistant", content: errorMsg, timestamp: Date.now() };
+        } else {
+          newMessages.push({ role: "assistant", content: errorMsg, timestamp: Date.now() });
+        }
+        return newMessages;
+      });
     } finally {
       setIsLoading(false);
+      isSendingRef.current = false;
     }
   }, [messages, sessionId, saveMessage, session, generateSessionTitle, errorRetryCount]);
 

@@ -66,32 +66,33 @@ function getLocationDay(index: number, total: number): number {
 // Marker Icon
 // ──────────────────────────────────────────────────
 
+// Fixed icon size — NEVER change iconSize/iconAnchor on hover!
+// Changing size causes Leaflet to reposition the marker, making it "fly away".
+// Instead, use CSS transform-origin + scale for hover effects.
+const ICON_SIZE = 38;
+const ICON_HEIGHT = 48;
+
 function createMarkerIcon(
   category: string,
   index: number,
   dayColor: string,
   isSelected: boolean,
-  isHovered: boolean
+  _isHovered: boolean // hover is handled purely via CSS now
 ): any {
   if (typeof window === "undefined") return null;
   const L = require("leaflet");
   const config = categoryConfig[category] || categoryConfig.other;
-  const active = isSelected || isHovered;
-  const size = active ? 46 : 38;
-  const viewBoxH = active ? 58 : 48;
 
   const svgIcon = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${viewBoxH}" viewBox="0 0 38 48"
-         style="transition:transform 0.2s ease;${active ? "transform:scale(1.1);" : ""}">
+    <svg xmlns="http://www.w3.org/2000/svg" width="${ICON_SIZE}" height="${ICON_HEIGHT}" viewBox="0 0 38 48">
       <defs>
-        <filter id="ms${index}${active ? "a" : ""}" x="-25%" y="-15%" width="150%" height="140%">
-          <feDropShadow dx="0" dy="${active ? 3 : 2}" stdDeviation="${active ? 4 : 2.5}" 
-                        flood-color="rgba(0,0,0,${active ? 0.4 : 0.25})"/>
+        <filter id="ms${index}" x="-25%" y="-15%" width="150%" height="140%">
+          <feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="rgba(0,0,0,0.25)"/>
         </filter>
       </defs>
       <path d="M19 0C8.51 0 0 8.51 0 19c0 14.25 19 29 19 29s19-14.75 19-29C38 8.51 29.49 0 19 0z" 
-            fill="${dayColor}" filter="url(#ms${index}${active ? "a" : ""})"
-            ${active ? 'stroke="white" stroke-width="2.5"' : 'stroke="white" stroke-width="1"'}/>
+            fill="${dayColor}" filter="url(#ms${index})"
+            ${isSelected ? 'stroke="white" stroke-width="2.5"' : 'stroke="white" stroke-width="1"'}/>
       <circle cx="19" cy="18" r="12" fill="white" opacity="0.95"/>
       <text x="19" y="23" text-anchor="middle" font-size="14">${config.emoji}</text>
       <circle cx="30" cy="8" r="8.5" fill="#083022" stroke="white" stroke-width="1.5"/>
@@ -101,10 +102,10 @@ function createMarkerIcon(
 
   return L.divIcon({
     html: svgIcon,
-    className: `tototrip-marker ${active ? "tototrip-marker-active" : ""}`,
-    iconSize: [size, viewBoxH],
-    iconAnchor: [size / 2, viewBoxH],
-    popupAnchor: [0, -viewBoxH + 6],
+    className: `tototrip-marker ${isSelected ? "tototrip-marker-selected" : ""}`,
+    iconSize: [ICON_SIZE, ICON_HEIGHT],
+    iconAnchor: [ICON_SIZE / 2, ICON_HEIGHT],
+    popupAnchor: [0, -ICON_HEIGHT + 6],
   });
 }
 
@@ -351,7 +352,6 @@ export function MapPanel({
   const mapRef = useRef<any>(null);
   const markersRef = useRef<Record<string, any>>({});
   const prevTriggerRef = useRef(flyToTrigger);
-  const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [selectedDay, setSelectedDay] = useState<number | null>(null); // null = all
   const [icons, setIcons] = useState<Record<string, any>>({});
 
@@ -384,7 +384,7 @@ export function MapPanel({
     );
   }, [validLocations, selectedDay]);
 
-  // Build icons whenever display changes
+  // Build icons whenever display changes — hover is CSS-only, no icon rebuild needed
   useEffect(() => {
     if (!isClient) return;
     const newIcons: Record<string, any> = {};
@@ -393,19 +393,18 @@ export function MapPanel({
       const day = getLocationDay(globalIndex, validLocations.length);
       const dayColor = getDayColor(day);
       const isSelected = selectedLocationId === loc.id;
-      const isHovered = hoveredId === loc.id;
-      const key = `${loc.id}-${isSelected}-${isHovered}`;
+      const key = `${loc.id}-${isSelected}`;
       const icon = createMarkerIcon(
         loc.category,
         globalIndex,
         dayColor,
         isSelected,
-        isHovered
+        false // hover handled via CSS
       );
       if (icon) newIcons[key] = icon;
     });
     setIcons(newIcons);
-  }, [isClient, displayLocations, validLocations, selectedLocationId, hoveredId]);
+  }, [isClient, displayLocations, validLocations, selectedLocationId]);
 
   // Fly to locations on trigger
   useEffect(() => {
@@ -467,14 +466,22 @@ export function MapPanel({
       {/* Inject scoped styles for popups and markers */}
       <style jsx global>{`
         /* ── Marker transitions ── */
+        /* Hover/active effects via CSS only — never change iconSize! */
         .tototrip-marker {
           background: transparent !important;
           border: none !important;
           transition: transform 0.2s ease, filter 0.2s ease;
+          transform-origin: center bottom;
         }
-        .tototrip-marker-active {
-          z-index: 1000 !important;
+        .tototrip-marker:hover {
+          transform: scale(1.15) !important;
           filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+          z-index: 1000 !important;
+        }
+        .tototrip-marker-selected {
+          transform: scale(1.15) !important;
+          filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+          z-index: 1000 !important;
         }
 
         /* ── Rich Popup ── */
@@ -790,8 +797,7 @@ export function MapPanel({
           const day = getLocationDay(globalIndex, validLocations.length);
           const dayColor = getDayColor(day);
           const isSelected = selectedLocationId === location.id;
-          const isHovered = hoveredId === location.id;
-          const iconKey = `${location.id}-${isSelected}-${isHovered}`;
+          const iconKey = `${location.id}-${isSelected}`;
           const icon = icons[iconKey];
           if (!icon) return null;
 
@@ -802,10 +808,6 @@ export function MapPanel({
               icon={icon}
               ref={(ref: any) => {
                 if (ref) markersRef.current[location.id] = ref;
-              }}
-              eventHandlers={{
-                mouseover: () => setHoveredId(location.id),
-                mouseout: () => setHoveredId(null),
               }}
             >
               <Popup

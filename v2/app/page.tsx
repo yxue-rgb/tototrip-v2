@@ -310,7 +310,7 @@ export default function Home() {
             {[
               { label: t("nav.destinations"), href: "#destinations" },
               { label: t("nav.inspiration"), href: "/inspiration" },
-              { label: "Guides", href: "/guides" },
+              { label: t("nav.guides"), href: "/guides" },
               { label: t("nav.toolkit"), href: "/toolkit" },
               { label: t("nav.whyTototrip"), href: "#why-tototrip" },
               { label: t("nav.howItWorks"), href: "#how-it-works" },
@@ -417,7 +417,7 @@ export default function Home() {
                 { label: t("nav.home"), href: "/" },
                 { label: t("nav.destinations"), href: "#destinations" },
                 { label: t("nav.inspiration"), href: "/inspiration" },
-                { label: "Guides", href: "/guides" },
+                { label: t("nav.guides"), href: "/guides" },
                 { label: t("nav.toolkit"), href: "/toolkit" },
                 { label: t("nav.whyTototrip"), href: "#why-tototrip" },
                 { label: t("nav.howItWorks"), href: "#how-it-works" },
@@ -604,19 +604,19 @@ export default function Home() {
           <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10">
             <div className="flex items-center gap-2 text-slate-400 dark:text-slate-500">
               <Sparkles className="h-4 w-4 text-[#E7B61B]" />
-              <span className="text-xs font-semibold uppercase tracking-wider">Powered by Google AI</span>
+              <span className="text-xs font-semibold uppercase tracking-wider">{t("trustBar.poweredByAI")}</span>
             </div>
             <div className="flex items-center gap-2 text-slate-400 dark:text-slate-500">
               <Globe className="h-4 w-4 text-[#6BBFAC]" />
-              <span className="text-xs font-semibold uppercase tracking-wider">50+ Cities Covered</span>
+              <span className="text-xs font-semibold uppercase tracking-wider">{t("trustBar.citiesCovered")}</span>
             </div>
             <div className="flex items-center gap-2 text-slate-400 dark:text-slate-500">
               <MessageCircle className="h-4 w-4 text-[#99B7CF]" />
-              <span className="text-xs font-semibold uppercase tracking-wider">24/7 AI Travel Companion</span>
+              <span className="text-xs font-semibold uppercase tracking-wider">{t("trustBar.aiCompanion")}</span>
             </div>
             <div className="flex items-center gap-2 text-slate-400 dark:text-slate-500">
               <Shield className="h-4 w-4 text-[#C999C5]" />
-              <span className="text-xs font-semibold uppercase tracking-wider">Free to Use</span>
+              <span className="text-xs font-semibold uppercase tracking-wider">{t("trustBar.freeToUse")}</span>
             </div>
           </div>
         </div>
@@ -997,9 +997,9 @@ export default function Home() {
               </span>
             </div>
             <h2 className="font-display text-3xl md:text-5xl lg:text-6xl text-white mb-6 tracking-tight">
-              PACK
+              {t("cta.packLine1")}
               <br />
-              <span className="text-gradient-brand">LIGHT-HEARTED</span>
+              <span className="text-gradient-brand">{t("cta.packLine2")}</span>
             </h2>
             <p className="text-lg text-white/50 mb-10 max-w-xl mx-auto leading-relaxed">
               {t("cta.subtitle")}
@@ -1048,7 +1048,7 @@ export default function Home() {
               <ul className="space-y-2.5">
                 <li><a href="/chat/new" className="text-sm text-white/40 hover:text-[#99B7CF] transition-colors">{t("nav.chat")}</a></li>
                 <li><a href="/inspiration" className="text-sm text-white/40 hover:text-[#99B7CF] transition-colors">{t("nav.inspiration")}</a></li>
-                <li><a href="/guides" className="text-sm text-white/40 hover:text-[#99B7CF] transition-colors">Guides</a></li>
+                <li><a href="/guides" className="text-sm text-white/40 hover:text-[#99B7CF] transition-colors">{t("nav.guides")}</a></li>
                 <li><a href="/toolkit" className="text-sm text-white/40 hover:text-[#99B7CF] transition-colors">{t("nav.toolkit")}</a></li>
                 <li><a href="#destinations" className="text-sm text-white/40 hover:text-[#99B7CF] transition-colors">{t("nav.destinations")}</a></li>
               </ul>

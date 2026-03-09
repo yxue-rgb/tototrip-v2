@@ -225,15 +225,16 @@ function MessageBubble({ message, onSaveLocation, onPlaceViewDetails }: { messag
         </div>
       </motion.div>
 
-      {/* Place cards (AI Rich Cards) */}
+      {/* Place cards (AI Rich Cards) — only show if we have rich place data */}
+      {/* When both PlaceCards and LocationCards exist, prefer PlaceCards (richer data) */}
       {!isUser && places.length > 0 && (
         <div className="w-full max-w-4xl ml-10">
           <PlaceCardsGrid places={places} onViewDetails={onPlaceViewDetails} />
         </div>
       )}
 
-      {/* Location cards (map is in the right panel, not inline) */}
-      {!isUser && locations.length > 0 && (
+      {/* Location cards — only show if NO PlaceCards (avoid duplicates) */}
+      {!isUser && locations.length > 0 && places.length === 0 && (
         <div className="w-full max-w-4xl ml-10">
           <LocationsGrid
             locations={locations}

@@ -9,12 +9,13 @@ export function generateStaticParams() {
   }));
 }
 
-export function generateMetadata({
+export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
-}): Metadata {
-  const guide = GUIDES.find((g) => g.slug === params.slug);
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const guide = GUIDES.find((g) => g.slug === slug);
   if (!guide) return {};
 
   return {
@@ -29,12 +30,13 @@ export function generateMetadata({
   };
 }
 
-export default function GuidePage({
+export default async function GuidePage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const guide = GUIDES.find((g) => g.slug === params.slug);
+  const { slug } = await params;
+  const guide = GUIDES.find((g) => g.slug === slug);
   if (!guide) notFound();
 
   return <GuideContent guide={guide} />;

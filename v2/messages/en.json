@@ -3,6 +3,7 @@
     "home": "Home",
     "destinations": "Destinations",
     "inspiration": "Inspiration",
+    "guides": "Guides",
     "toolkit": "Toolkit",
     "whyTototrip": "Why TotoTrip",
     "howItWorks": "How it Works",
@@ -187,12 +188,20 @@
     "title": "Continue Planning",
     "viewAll": "View All"
   },
+  "trustBar": {
+    "poweredByAI": "Powered by Google AI",
+    "citiesCovered": "50+ Cities Covered",
+    "aiCompanion": "24/7 AI Travel Companion",
+    "freeToUse": "Free to Use"
+  },
   "cta": {
     "badge": "Free to Start",
     "title": "Ready to Explore",
     "titleHighlight": "the Real China?",
     "subtitle": "No signup required. Just tell Toto where you want to go and get a detailed plan in seconds.",
-    "button": "Start Planning Free"
+    "button": "Start Planning Free",
+    "packLine1": "PACK",
+    "packLine2": "LIGHT-HEARTED"
   },
   "footer": {
     "description": "Your AI-powered travel companion for China. Navigate payments, language, and culture — with confidence.",

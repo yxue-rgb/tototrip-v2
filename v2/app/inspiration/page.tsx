@@ -18,6 +18,8 @@ import {
 } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageToggle } from "@/components/LanguageToggle";
+import { SharedNavbar } from "@/components/SharedNavbar";
+import { SharedFooter } from "@/components/SharedFooter";
 import { useI18n } from "@/contexts/I18nContext";
 import { toast } from "sonner";
 import { trackEvent } from "@/lib/analytics";
@@ -203,101 +205,7 @@ export default function InspirationPage() {
 
   return (
     <div className="min-h-screen bg-[var(--brand-cream)] dark:bg-[#0a1a13]">
-      {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 glass border-b border-[#E0C4BC]/30 dark:border-white/10" role="banner">
-        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <button
-            onClick={() => router.push("/")}
-            className="flex items-center gap-2.5 hover:opacity-80 transition-opacity"
-          >
-            <Image
-              src="/brand/toto_logo_plain.png"
-              alt="toto"
-              width={80}
-              height={28}
-              className="h-7 w-auto dark:hidden"
-            />
-            <Image
-              src="/brand/toto_logo_plain_light.png"
-              alt="toto"
-              width={80}
-              height={28}
-              className="h-7 w-auto hidden dark:block"
-            />
-          </button>
-
-          <nav className="hidden md:flex items-center gap-1">
-            <a
-              href="/"
-              className="px-3 py-2 text-sm font-medium text-[#083022]/70 dark:text-slate-400 hover:text-[#083022] dark:hover:text-white rounded-lg hover:bg-[#E0C4BC]/20 dark:hover:bg-white/10 transition-all"
-            >
-              {t("nav.home")}
-            </a>
-            <span className="px-3 py-2 text-sm font-medium text-[#E95331] bg-[#E95331]/10 rounded-lg">
-              {t("nav.inspiration")}
-            </span>
-            <a
-              href="/toolkit"
-              className="px-3 py-2 text-sm font-medium text-[#083022]/70 dark:text-slate-400 hover:text-[#083022] dark:hover:text-white rounded-lg hover:bg-[#E0C4BC]/20 dark:hover:bg-white/10 transition-all"
-            >
-              {t("nav.toolkit")}
-            </a>
-          </nav>
-
-          <div className="flex items-center gap-2">
-            <LanguageToggle />
-            <ThemeToggle />
-            <Button
-              onClick={() => router.push(`/chat/temp-${Date.now()}`)}
-              size="sm"
-              className="hidden md:inline-flex bg-[#E95331] hover:bg-[#d44a2b] text-white shadow-md shadow-[#E95331]/20 border-0 text-sm"
-            >
-              {t("nav.startPlanning")}
-            </Button>
-
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 rounded-lg text-[#083022] dark:text-slate-400 hover:text-[#083022] dark:hover:text-white hover:bg-[#E0C4BC]/20 dark:hover:bg-white/10 transition-all"
-              aria-label="Toggle menu"
-            >
-              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile menu backdrop */}
-        {mobileMenuOpen && (
-          <div
-            className="md:hidden fixed inset-0 top-16 z-40"
-            onClick={() => setMobileMenuOpen(false)}
-          />
-        )}
-
-        {/* Mobile menu */}
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.2 }}
-            className="md:hidden bg-white/95 dark:bg-[#0d2a1f]/95 backdrop-blur-xl border-b border-[#E0C4BC]/30 dark:border-white/10 shadow-elevated relative z-50"
-          >
-            <div className="container mx-auto px-4 py-4 space-y-1">
-              <a href="/" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 text-sm font-medium text-[#083022] dark:text-slate-300 hover:text-[#E95331] hover:bg-[#E0C4BC]/20 dark:hover:bg-[#E95331]/10 rounded-xl transition-all">
-                {t("nav.home")}
-              </a>
-              <span className="block px-4 py-3 text-sm font-medium text-[#E95331] bg-[#E95331]/10 rounded-xl">
-                {t("nav.inspiration")}
-              </span>
-              <div className="border-t border-[#E0C4BC]/30 dark:border-white/10 my-2" />
-              <div className="px-4 pt-2 pb-1">
-                <Button onClick={() => { router.push(`/chat/temp-${Date.now()}`); setMobileMenuOpen(false); }} className="w-full bg-[#E95331] hover:bg-[#d44a2b] text-white shadow-md shadow-[#E95331]/20 border-0 text-sm">
-                  {t("nav.startPlanning")}
-                </Button>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </header>
+      <SharedNavbar activePage="inspiration" />
 
       {/* Hero */}
       <section className="pt-16">
@@ -409,23 +317,7 @@ export default function InspirationPage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-10 px-4 bg-[#083022] border-t border-[#6BBFAC]/10">
-        <div className="container mx-auto max-w-6xl text-center">
-          <div className="flex items-center justify-center gap-2.5 mb-4">
-            <Image
-              src="/brand/toto_logo_plain_light.png"
-              alt="toto"
-              width={80}
-              height={28}
-              className="h-6 w-auto"
-            />
-          </div>
-          <p className="text-sm text-white/30">
-            &copy; {new Date().getFullYear()} {t("footer.copyright")}
-          </p>
-        </div>
-      </footer>
+      <SharedFooter />
     </div>
   );
 }

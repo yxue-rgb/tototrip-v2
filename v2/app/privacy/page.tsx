@@ -6,6 +6,7 @@ import { ArrowLeft } from "lucide-react";
 import { useI18n } from "@/contexts/I18nContext";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageToggle } from "@/components/LanguageToggle";
+import { SharedFooter } from "@/components/SharedFooter";
 import { motion } from "framer-motion";
 
 export default function PrivacyPage() {
@@ -24,7 +25,7 @@ export default function PrivacyPage() {
           >
             <ArrowLeft className="h-4 w-4" />
             <Image
-              src="/brand/toto_logo_plain_dark.png"
+              src="/brand/toto_logo_plain.png"
               alt="toto"
               width={60}
               height={20}
@@ -85,22 +86,7 @@ export default function PrivacyPage() {
         </motion.div>
       </main>
 
-      {/* Mini footer */}
-      <footer className="py-8 px-4 bg-[#083022] border-t border-[#6BBFAC]/10">
-        <div className="container mx-auto max-w-3xl flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-white/30">
-            &copy; 2026 toto. {t("footer.allRightsReserved")}
-          </p>
-          <div className="flex gap-6">
-            <Link href="/terms" className="text-sm text-white/40 hover:text-[#99B7CF] transition-colors">
-              {t("footer.terms")}
-            </Link>
-            <Link href="/about" className="text-sm text-white/40 hover:text-[#99B7CF] transition-colors">
-              {t("footer.about")}
-            </Link>
-          </div>
-        </div>
-      </footer>
+      <SharedFooter />
     </div>
   );
 }
@@ -144,13 +130,13 @@ const enContent: { lastUpdated: string; sections: Section[] } = {
     {
       title: "Third-Party Services",
       paragraphs: [
-        "To provide AI-powered travel advice, we send your conversation messages to third-party AI service providers (such as OpenAI and Anthropic) for processing. These providers process your data in accordance with their own privacy policies.",
+        "To provide AI-powered travel advice, we send your conversation messages to Google Gemini AI for processing. Google processes your data in accordance with their own privacy policies.",
         "We also use the following third-party services:",
       ],
       list: [
         "Authentication providers (Google OAuth) — for account sign-in",
         "Supabase — for secure data storage and authentication",
-        "Zeabur — for hosting infrastructure",
+        "Vercel — for hosting infrastructure",
       ],
     },
     {
@@ -225,13 +211,13 @@ const zhContent: { lastUpdated: string; sections: Section[] } = {
     {
       title: "第三方服务",
       paragraphs: [
-        "为提供 AI 驱动的旅行建议，我们会将您的对话消息发送给第三方 AI 服务提供商（如 OpenAI 和 Anthropic）进行处理。这些提供商根据其自身的隐私政策处理您的数据。",
+        "为提供 AI 驱动的旅行建议，我们会将您的对话消息发送给 Google Gemini AI 进行处理。Google 根据其自身的隐私政策处理您的数据。",
         "我们还使用以下第三方服务：",
       ],
       list: [
         "身份验证提供商（Google OAuth）— 用于账户登录",
         "Supabase — 用于安全数据存储和身份验证",
-        "Zeabur — 用于托管基础设施",
+        "Vercel — 用于托管基础设施",
       ],
     },
     {

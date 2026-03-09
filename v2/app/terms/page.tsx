@@ -6,6 +6,7 @@ import { ArrowLeft } from "lucide-react";
 import { useI18n } from "@/contexts/I18nContext";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageToggle } from "@/components/LanguageToggle";
+import { SharedFooter } from "@/components/SharedFooter";
 import { motion } from "framer-motion";
 
 export default function TermsPage() {
@@ -24,7 +25,7 @@ export default function TermsPage() {
           >
             <ArrowLeft className="h-4 w-4" />
             <Image
-              src="/brand/toto_logo_plain_dark.png"
+              src="/brand/toto_logo_plain.png"
               alt="toto"
               width={60}
               height={20}
@@ -85,22 +86,7 @@ export default function TermsPage() {
         </motion.div>
       </main>
 
-      {/* Mini footer */}
-      <footer className="py-8 px-4 bg-[#083022] border-t border-[#6BBFAC]/10">
-        <div className="container mx-auto max-w-3xl flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-white/30">
-            &copy; 2026 toto. {t("footer.allRightsReserved")}
-          </p>
-          <div className="flex gap-6">
-            <Link href="/privacy" className="text-sm text-white/40 hover:text-[#99B7CF] transition-colors">
-              {t("footer.privacy")}
-            </Link>
-            <Link href="/about" className="text-sm text-white/40 hover:text-[#99B7CF] transition-colors">
-              {t("footer.about")}
-            </Link>
-          </div>
-        </div>
-      </footer>
+      <SharedFooter />
     </div>
   );
 }
