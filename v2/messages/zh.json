@@ -1,0 +1,656 @@
+{
+  "nav": {
+    "home": "首页",
+    "destinations": "热门目的地",
+    "inspiration": "灵感行程",
+    "toolkit": "实用工具",
+    "whyTototrip": "为什么选途图",
+    "howItWorks": "如何使用",
+    "myTrips": "我的行程",
+    "locations": "收藏地点",
+    "login": "登录",
+    "logout": "退出",
+    "getStarted": "立即开始",
+    "startPlanning": "免费开始规划",
+    "chat": "聊天"
+  },
+  "hero": {
+    "badge": "AI 智能旅行助手",
+    "titleLine1": "用 AI 规划你的",
+    "titleLine2": "中国之旅 — ",
+    "titleHighlight": "几分钟搞定",
+    "subtitle": "支付、高铁、VPN、美食、语言——这些真正让外国人头疼的问题，途图全搞定。",
+    "searchPlaceholder": "你想去中国哪里？🐕",
+    "searchButton": "免费开始规划",
+    "popular": "热门:"
+  },
+  "quickTags": {
+    "beijing": "北京",
+    "shanghai": "上海",
+    "chengdu": "成都",
+    "foodTour": "美食之旅",
+    "historyCulture": "历史文化",
+    "beijing3d": "北京 3 天",
+    "silkRoad": "丝绸之路",
+    "chengduFood": "成都美食之旅",
+    "firstTime": "第一次去中国"
+  },
+  "destinations": {
+    "sectionLabel": "热门目的地",
+    "title": "你的旅程",
+    "titleHighlight": "将去往何方？",
+    "subtitle": "从古都到未来都市 — 每个目的地都配有专属 AI 向导。",
+    "viewItineraries": "查看精选行程",
+    "beijing": {
+      "name": "北京",
+      "chinese": "北京",
+      "desc": "千年帝都，长城与故宫见证辉煌历史",
+      "tag": "历史文化"
+    },
+    "shanghai": {
+      "name": "上海",
+      "chinese": "上海",
+      "desc": "未来天际线邂逅浪漫法租界街巷",
+      "tag": "现代都市"
+    },
+    "chengdu": {
+      "name": "成都",
+      "chinese": "成都",
+      "desc": "大熊猫的故乡，火锅之城，悠闲茶馆",
+      "tag": "美食与熊猫"
+    },
+    "xian": {
+      "name": "西安",
+      "chinese": "西安",
+      "desc": "兵马俑、古城墙与丝绸之路遗产",
+      "tag": "古都"
+    },
+    "guilin": {
+      "name": "桂林",
+      "chinese": "桂林",
+      "desc": "漓江烟雨中，喀斯特群峰如画卷展开",
+      "tag": "自然奇观"
+    },
+    "hongkong": {
+      "name": "香港",
+      "chinese": "香港",
+      "desc": "璀璨维港夜景，点心飘香，街市繁华",
+      "tag": "东西交融"
+    },
+    "hangzhou": {
+      "name": "杭州",
+      "chinese": "杭州",
+      "desc": "西湖如画、龙井飘香、科技之都",
+      "tag": "人间天堂"
+    },
+    "kunming": {
+      "name": "昆明",
+      "chinese": "昆明",
+      "desc": "四季如春、民族风情、云南门户",
+      "tag": "春城"
+    },
+    "lhasa": {
+      "name": "拉萨",
+      "chinese": "拉萨",
+      "desc": "布达拉宫圣光、藏传佛教文化、世界屋脊",
+      "tag": "圣城"
+    },
+    "harbin": {
+      "name": "哈尔滨",
+      "chinese": "哈尔滨",
+      "desc": "世界冰雪节、俄式建筑、冰天雪地的冬日仙境",
+      "tag": "冰城"
+    }
+  },
+  "socialProof": {
+    "sectionLabel": "我们的服务",
+    "title": "为真正的",
+    "titleHighlight": "旅行者打造",
+    "subtitle": "探索中国所需的一切 — 从支付设置到当地美食发现。",
+    "stats": {
+      "citiesCovered": "城市已覆盖",
+      "curatedItineraries": "精选行程",
+      "poweredByAI": "AI 驱动",
+      "alwaysAvailable": "全天候在线"
+    },
+    "testimonials": {
+      "sarah": {
+        "name": "你能做什么",
+        "from": "支付与导航",
+        "text": "用外国银行卡开通微信支付和支付宝，购买高铁票，无需 Google 地图导航城市，获取实时翻译和点餐帮助。"
+      },
+      "marcus": {
+        "name": "如何运作",
+        "from": "AI 智能规划",
+        "text": "告诉途图你的目的地、兴趣和预算。获取详细的逐日行程，包含时间、费用和内行贴士 — 再通过对话不断优化。"
+      },
+      "yuki": {
+        "name": "旅行工具箱",
+        "from": "实用指南",
+        "text": "查阅 VPN 设置、eSIM 推荐、免签入境政策、必备中文短语和每座城市的必吃美食等全面指南。"
+      }
+    }
+  },
+  "whyTotoTrip": {
+    "sectionLabel": "为什么选途图",
+    "title": "中国旅行",
+    "titleHighlight": "难题，一键解决",
+    "subtitle": "我们深知外国旅行者在中国面临的独特挑战 — 我们的 AI 逐一攻克。",
+    "painPoints": {
+      "payment": {
+        "title": "微信 & 支付宝设置",
+        "desc": "手把手教你开通移动支付 — 现已支持外国银行卡。"
+      },
+      "rail": {
+        "title": "高铁购票指南",
+        "desc": "用护照购买高铁票。带你轻松搞定 12306 或 Trip.com。"
+      },
+      "vpn": {
+        "title": "VPN 与上网",
+        "desc": "翻越防火长城，eSIM 设置 + VPN 推荐一步到位。"
+      },
+      "food": {
+        "title": "像本地人一样点餐",
+        "desc": "扫码点餐、美食词汇、饮食禁忌 — 全部帮你搞定。"
+      },
+      "language": {
+        "title": "语言与翻译",
+        "desc": "必备短语、实时翻译帮助和文化沟通技巧。"
+      },
+      "safety": {
+        "title": "安全与导航",
+        "desc": "急救电话、医院信息、无需 Google 地图的离线导航。"
+      }
+    }
+  },
+  "howItWorks": {
+    "sectionLabel": "如何使用",
+    "title": "三步打造",
+    "titleHighlight": "完美旅程",
+    "subtitle": "无需注册，无需设置。秒速开聊。",
+    "steps": {
+      "step1": {
+        "title": "告诉我们你的计划",
+        "desc": "分享你的目的地、日期、兴趣和预算。AI 会通过智能追问，精准理解你的需求。"
+      },
+      "step2": {
+        "title": "获取 AI 定制行程",
+        "desc": "收到详细的逐日计划，包含时间、费用、交通和独家贴士 — 完全为你量身定制。"
+      },
+      "step3": {
+        "title": "带着 AI 同行出发",
+        "desc": "旅途中使用 TotoTrip 获取实时帮助 — 翻译、导航、点餐、紧急支援。"
+      }
+    }
+  },
+  "recentSessions": {
+    "title": "继续规划",
+    "viewAll": "查看全部"
+  },
+  "cta": {
+    "badge": "免费开始",
+    "title": "准备好探索",
+    "titleHighlight": "真正的中国了吗？",
+    "subtitle": "无需注册。告诉途图你想去哪里，几秒钟就能获得详细规划。",
+    "button": "免费开始规划"
+  },
+  "footer": {
+    "description": "专为中国旅行打造的 AI 伴侣。轻松搞定支付、语言和文化难题。",
+    "product": "产品",
+    "cities": "城市",
+    "company": "关于我们",
+    "connect": "社交媒体",
+    "about": "关于",
+    "faq": "常见问题",
+    "support": "支持",
+    "helpCenter": "帮助中心",
+    "privacy": "隐私政策",
+    "terms": "服务条款",
+    "copyright": "TotoTrip 途图旅行。用 ❤️ 为探索中国的旅行者而做。",
+    "allRightsReserved": "保留所有权利。"
+  },
+  "chat": {
+    "backToHome": "返回",
+    "aiName": "途图 AI",
+    "savedAuto": "对话自动保存",
+    "signInToSave": "登录以保存对话",
+    "myPlaces": "我的地点",
+    "online": "在线",
+    "popularQuestions": "热门问题",
+    "inputPlaceholder": "问我任何关于中国旅行的问题…",
+    "inputHint": "按 Enter 发送 · Shift+Enter 换行 · 由 Gemini AI 驱动",
+    "quickActions": {
+      "beijing": "规划5天北京上海行程",
+      "wechat": "如何设置微信支付？",
+      "food": "成都最好的街头美食",
+      "rail": "帮我订高铁票",
+      "vpn": "在中国用什么 VPN 最好？",
+      "phrases": "旅行者必备中文短语"
+    },
+    "conversations": "对话列表",
+    "newChat": "新对话",
+    "noConversations": "暂无对话",
+    "noConversationsHint": "开始新对话，规划你的中国之旅",
+    "deleteConfirm": "确定删除这段对话吗？",
+    "loading": "正在加载对话…",
+    "welcome": {
+      "title": "欢迎使用途图 AI",
+      "subtitle": "我是你的中国旅行私人助手。告诉我你的旅行计划，我帮你打造完美冒险之旅。",
+      "quickActionBeijing": "规划北京之旅",
+      "quickActionFood": "推荐美食",
+      "quickActionTrain": "购买火车票",
+      "quickActionWechat": "微信支付设置",
+      "quickActionVisa": "签证帮助",
+      "quickActionWeather": "天气查询",
+      "quickActionCurrency": "货币换算",
+      "quickActionSafety": "安全贴士",
+      "hintWhere": "你想去中国哪里？",
+      "hintDays": "你的旅行有几天？",
+      "hintInterest": "你最感兴趣的是什么？"
+    },
+    "copied": "已复制！",
+    "copyMessage": "复制",
+    "thinking": "途图正在思考...",
+    "showMore": "展开更多",
+    "showLess": "收起",
+    "retry": "重试",
+    "refreshPage": "刷新页面",
+    "errorOffline": "你目前处于离线状态 — 请检查网络连接后重试。",
+    "errorPersistent": "连接遇到问题。请尝试刷新页面或稍后再来。",
+    "errorTemporary": "AI 服务暂时不可用。点击重试按钮再试一次。",
+    "sendMessage": "发送消息",
+    "errorRateLimit": "你发送的消息太多了，请稍等片刻再试。"
+  },
+  "inspiration": {
+    "badge": "精选行程",
+    "title": "为你的中国之旅",
+    "titleHighlight": "寻找灵感",
+    "subtitle": "由中国旅行专家精心策划的行程。选一个，用 AI 定制，打造你的专属旅程。",
+    "viewPlan": "查看计划",
+    "estBudget": "预估预算",
+    "allPlans": "全部计划",
+    "overview": "概述",
+    "tripHighlights": "行程亮点",
+    "bestFor": "最适合",
+    "dayByDay": "逐日行程",
+    "insiderTips": "💡 内行贴士",
+    "lovePlan": "喜欢这个行程？",
+    "lovePlanDesc": "与 AI 旅行顾问聊天，根据你的偏好、日期和预算进行定制。",
+    "usePlan": "使用此计划",
+    "customTitle": "想去其他目的地？",
+    "customDesc": "我们的 AI 可以为中国任何城市创建完全定制的行程 — 只需告诉它你想要什么。",
+    "customButton": "创建定制行程",
+    "createCustom": "创建定制行程",
+    "cities": "城市",
+    "duration": "时长",
+    "budget": "预算",
+    "bestSeason": "最佳季节",
+    "route": "路线：",
+    "highlights": "亮点",
+    "noTemplates": "没有找到该主题的模板，请试试其他的！"
+  },
+  "auth": {
+    "title": "途图旅行",
+    "subtitle": "你的 AI 中国旅行伴侣",
+    "welcomeBack": "欢迎回来",
+    "loginDesc": "登录账户，继续你的旅程",
+    "createAccount": "创建账户",
+    "signupDesc": "今天就开始规划你的中国之旅",
+    "email": "邮箱",
+    "password": "密码",
+    "fullName": "姓名",
+    "loginButton": "登录",
+    "loggingIn": "登录中...",
+    "signupButton": "注册",
+    "creatingAccount": "创建账户中...",
+    "orContinueWith": "或通过以下方式继续",
+    "continueGoogle": "使用 Google 登录",
+    "passwordHint": "至少 6 个字符",
+    "termsNotice": "继续即表示同意我们的服务条款和隐私政策",
+    "tabLogin": "登录",
+    "tabSignup": "注册"
+  },
+  "toolkit": {
+    "badge": "实用旅行工具箱",
+    "heroTitle": "来中国旅行",
+    "heroHighlight": "你需要知道的一切",
+    "heroSubtitle": "外国游客的终极生存指南。支付、上网、交通、美食 — 所有实用信息一站搞定。",
+    "clickToExpand": "点击展开各板块",
+    "expandAll": "全部展开",
+    "collapseAll": "全部收起",
+    "ctaTitle": "还有疑问？",
+    "ctaSubtitle": "与我们的 AI 旅行助手聊天，获取针对你中国之旅的个性化建议。",
+    "ctaChat": "与途图 AI 聊天",
+    "ctaInspiration": "浏览精选行程",
+    "homeCta": "📚 查看旅行实用工具箱 →",
+    "sections": {
+      "payment": {
+        "title": "支付指南",
+        "summary": "微信支付、支付宝设置，现金使用与备选方案"
+      },
+      "visa": {
+        "title": "签证入境",
+        "summary": "144小时过境免签、免签国家列表与入境须知"
+      },
+      "internet": {
+        "title": "上网指南",
+        "summary": "eSIM 推荐、VPN 选择与机场网络"
+      },
+      "transport": {
+        "title": "交通指南",
+        "summary": "高铁、地铁、网约车与机场交通"
+      },
+      "food": {
+        "title": "餐饮指南",
+        "summary": "找餐厅、扫码点餐、过敏沟通与必吃美食"
+      },
+      "language": {
+        "title": "语言",
+        "summary": "必备短语、翻译 App 推荐与常见标志"
+      }
+    },
+    "payment": {
+      "mobilePay": {
+        "title": "设置微信支付 & 支付宝",
+        "desc": "自 2024 年起，微信支付和支付宝均支持绑定外国信用卡/借记卡（Visa、Mastercard 等）。设置步骤如下：",
+        "step1": "出发前在应用商店下载微信或支付宝",
+        "step2": "使用手机号创建账户（支持国际号码）",
+        "step3": "进入「钱包」→「银行卡」→「添加银行卡」，输入你的外国信用卡/借记卡信息",
+        "step4": "使用护照照片完成实名认证",
+        "step5": "开始扫码支付！大部分商家都会展示支付二维码",
+        "tip": "支付宝的「Tour Pass」模式专为外国游客设计，通常是最简单的设置方式。"
+      },
+      "backup": {
+        "title": "备选支付方式",
+        "cash": "现金（人民币）— 随身携带一些！机场和中国银行的 ATM 接受外国卡。建议准备 ¥500-1000 起。",
+        "visa": "Visa/Mastercard — 国际酒店、大型商场和连锁餐厅接受。小店和街头摊位通常不接受。",
+        "atm": "ATM — 找中国银行、工商银行或建设银行。有英文界面，支持银联/Visa/Mastercard。"
+      },
+      "street": {
+        "title": "在市场和街头小吃摊支付",
+        "desc": "菜市场、街头小吃和小店几乎只用微信/支付宝二维码。部分可能接受现金但可能找不开大面额。",
+        "tip": "网络慢时可以截图商家的二维码 — 从相册也能扫码支付。备好 ¥10-20 面额的纸币以应对只收现金的小摊。"
+      }
+    },
+    "visa": {
+      "transit": {
+        "title": "144小时过境免签政策",
+        "desc": "54 个国家的公民在经主要城市过境时，可免签入境中国最多 144 小时（6天）。",
+        "portsLabel": "主要入境口岸",
+        "ports": "北京、上海、广州、成都、西安、杭州、南京、青岛、厦门、武汉、昆明等。30 多个机场和陆路/海路口岸适用。",
+        "requirementsLabel": "主要要求",
+        "requirements": "必须持有前往第三国（非出发国）的确认机票。停留范围限于指定行政区域。"
+      },
+      "visaFree": {
+        "title": "免签国家名单（50+ 国）",
+        "desc": "截至 2025 年，中国对法国、德国、意大利、西班牙、荷兰、马来西亚、泰国、新加坡、澳大利亚、新西兰等国公民实行免签入境，停留期限根据国籍为 15-30 天不等。",
+        "tip": "签证政策经常变化。出行前请务必在你所在国家的使馆网站或通过途图 AI 确认最新政策。"
+      },
+      "arrival": {
+        "title": "到达后须知",
+        "step1": "在飞机上或入境处填写入境卡（有英文版）",
+        "step2": "24 小时内到当地派出所登记 — 住酒店的话，酒店会自动办理",
+        "step3": "随身携带护照 — 酒店入住、购买火车票、购买 SIM 卡都需要",
+        "warning": "24 小时登记规定严格执行。如果住民宿或朋友家，你必须亲自到最近的派出所登记。"
+      }
+    },
+    "internet": {
+      "esim": {
+        "title": "eSIM — 最方便的选择",
+        "desc": "eSIM 是保持网络连接最便捷的方式。出发前购买，即时激活 — 无需更换实体 SIM 卡。",
+        "airalo": "Airalo — 热门选择，套餐低至 $5/1GB。设置简单，支持中国数据漫游。",
+        "holafly": "Holafly — 无限流量套餐，$19/5天起。适合重度用户。",
+        "nomad": "Nomad — 实惠的中国套餐，覆盖良好。3GB/7天 $8 起。",
+        "tip": "大多数 eSIM 使用漫游网络，这意味着它们可以绕过防火长城 — 你可以直接访问 Google、Instagram 和 WhatsApp，无需 VPN！"
+      },
+      "vpn": {
+        "title": "VPN 上网",
+        "desc": "Google、YouTube、Instagram、WhatsApp 等许多西方应用在中国被屏蔽。如果你的 eSIM 不能绕过防火墙，你需要 VPN。",
+        "rec1": "ExpressVPN — 在中国稳定可靠，易于使用。请在到达前下载并设置好。",
+        "rec2": "Astrill VPN — 以在中国的稳定连接著称。提供 StealthVPN 协议。",
+        "rec3": "Surfshark — 性价比高。NoBorders 模式专为受限网络设计。",
+        "warning": "务必在进入中国之前下载并配置好 VPN。VPN 网站和应用商店在国内被屏蔽。"
+      },
+      "airport": {
+        "title": "机场 WiFi 与实体 SIM 卡",
+        "desc": "主要机场提供免费 WiFi（需通过短信验证手机号）。可在到达大厅的中国移动/联通柜台购买实体 SIM 卡 — 带上护照。典型游客套餐：20GB/30天约 ¥200（$28）。"
+      }
+    },
+    "transport": {
+      "rail": {
+        "title": "高铁（高速铁路）",
+        "desc": "中国的高铁网络是世界上最大、最快的。列车时速达 350 公里，连接所有主要城市。",
+        "step1": "在 Trip.com（英文友好）或 12306 官方 App/网站购票。Trip.com 对外国人更友好。",
+        "step2": "购票时使用护照号。在车站凭护照取票，或使用电子票二维码。",
+        "step3": "提前 30-45 分钟到达。通过安检和身份核验，然后找到你的站台。",
+        "tip": "热门线路（北京↔上海等）建议提前 2-3 天预订。二等座舒适实惠（4.5 小时约 ¥140）。一等座贵约 50%。"
+      },
+      "metro": {
+        "title": "城市地铁",
+        "desc": "大多数中国大城市都有出色的地铁系统，有英文标识。乘坐方式：",
+        "alipay": "使用支付宝的交通二维码 — 在大多数城市无需购票即可使用。打开支付宝 → 出行 → 选择城市。",
+        "card": "购买可充值交通卡（交通卡），任何车站均可办理，押金约 ¥20。地铁、公交甚至部分出租车通用。",
+        "ticket": "自动售票机可购买单程票（有英文界面）。根据距离 ¥3-10 不等。"
+      },
+      "taxi": {
+        "title": "网约车（滴滴）",
+        "desc": "滴滴是中国的 Uber。下载滴滴 App（有国际版，支持英文）。可通过 App 绑定外国信用卡支付。",
+        "tip": "如果滴滴不好用，在手机上显示中文目的地给司机看。酒店前台也可以帮你叫车。避免在机场搭乘非正规出租车。"
+      },
+      "airport": {
+        "title": "机场到市区",
+        "desc": "每个主要机场都有地铁/城际快线、机场大巴和出租车站。地铁通常最便宜（¥5-25）且最快。机场大巴按固定路线到主要区域，¥20-35。出租车打表，到市中心约 ¥100-200。"
+      }
+    },
+    "food": {
+      "find": {
+        "title": "找好餐厅",
+        "desc": "大众点评是中国的「Yelp」— 找餐厅的第一 App，有评分、图片和菜单。下载后可使用相机翻译功能翻译中文菜单。",
+        "tip": "按「好评优先」排序，找 4.5 星以上的餐厅。图片评价特别有用，可以看到真实菜品照片。"
+      },
+      "order": {
+        "title": "扫码点餐",
+        "desc": "大多数餐厅现在使用二维码点餐代替纸质菜单：",
+        "step1": "用微信或支付宝扫描桌上的二维码",
+        "step2": "数字菜单出现 — 如果是中文可使用手机翻译功能",
+        "step3": "选择菜品、数量和辣度，然后提交订单",
+        "step4": "通过同一界面付款。菜品送到你的餐桌！"
+      },
+      "allergy": {
+        "title": "饮食禁忌与过敏",
+        "desc": "饮食需求的沟通很关键。将这些短语保存在手机上，展示给餐厅服务员：",
+        "noGluten": "我不能吃麸质 — I can't eat gluten",
+        "noPeanut": "我对花生过敏 — Allergic to peanuts",
+        "vegetarian": "我吃素 — I'm vegetarian",
+        "halal": "清真食品 — Halal food"
+      },
+      "mustTry": {
+        "title": "必吃中国美食",
+        "item1": "北京烤鸭 — 酥脆鸭皮配薄饼和甜面酱。去北京一定要尝！",
+        "item2": "小笼包 — 汤汁鲜美的蒸笼包。上海最正宗。小心烫！",
+        "item3": "火锅 — 互动式就餐：在滚烫的汤底中涮煮食材。成都风味最辣！",
+        "item4": "兰州拉面 — 到处都有。现拉现做的新鲜面条。约 ¥15-25。",
+        "item5": "糖葫芦 — 糖衣水果串。完美的街头小吃！"
+      }
+    },
+    "language": {
+      "phrases": {
+        "title": "必备中文短语",
+        "desc": "这 12 个短语能帮你应对大多数日常场景。收藏本页以便快速查阅！",
+        "hello": {
+          "cn": "你好",
+          "pinyin": "Nǐ hǎo",
+          "en": "Hello"
+        },
+        "thanks": {
+          "cn": "谢谢",
+          "pinyin": "Xiè xiè",
+          "en": "Thank you"
+        },
+        "sorry": {
+          "cn": "对不起",
+          "pinyin": "Duì bu qǐ",
+          "en": "Sorry"
+        },
+        "howMuch": {
+          "cn": "多少钱？",
+          "pinyin": "Duō shǎo qián?",
+          "en": "How much?"
+        },
+        "where": {
+          "cn": "...在哪里？",
+          "pinyin": "...zài nǎ lǐ?",
+          "en": "Where is...?"
+        },
+        "dontWant": {
+          "cn": "不要",
+          "pinyin": "Bú yào",
+          "en": "I don't want it"
+        },
+        "help": {
+          "cn": "帮帮我",
+          "pinyin": "Bāng bāng wǒ",
+          "en": "Help me"
+        },
+        "check": {
+          "cn": "买单",
+          "pinyin": "Mǎi dān",
+          "en": "Bill please"
+        },
+        "noSpicy": {
+          "cn": "不要辣",
+          "pinyin": "Bú yào là",
+          "en": "Not spicy"
+        },
+        "delicious": {
+          "cn": "好吃！",
+          "pinyin": "Hǎo chī!",
+          "en": "Delicious!"
+        },
+        "toilet": {
+          "cn": "厕所在哪？",
+          "pinyin": "Cè suǒ zài nǎ?",
+          "en": "Where's the toilet?"
+        },
+        "tooExpensive": {
+          "cn": "太贵了",
+          "pinyin": "Tài guì le",
+          "en": "Too expensive"
+        }
+      },
+      "apps": {
+        "title": "翻译 App 推荐",
+        "app1": "Google 翻译 — 出发前下载中文离线包。相机模式可即时翻译标志和菜单。",
+        "app2": "Apple 翻译 — iPhone 内置。下载语言包后可离线使用。适合对话翻译。",
+        "app3": "Pleco — 最好的中文词典 App。支持手写识别、OCR 相机和详细释义。"
+      },
+      "signs": {
+        "title": "常见标志",
+        "exit": {
+          "cn": "出口",
+          "en": "Exit"
+        },
+        "entrance": {
+          "cn": "入口",
+          "en": "Entrance"
+        },
+        "restroom": {
+          "cn": "洗手间",
+          "en": "Restroom"
+        },
+        "noSmoking": {
+          "cn": "禁止吸烟",
+          "en": "No Smoking"
+        },
+        "subway": {
+          "cn": "地铁",
+          "en": "Subway"
+        },
+        "danger": {
+          "cn": "危险",
+          "en": "Danger"
+        }
+      }
+    }
+  },
+  "trips": {
+    "myTrips": "我的行程",
+    "saveTrip": "保存行程",
+    "saved": "已保存！",
+    "share": "分享",
+    "savedToast": "行程已保存！✅",
+    "linkCopiedToast": "链接已复制！分享给你的旅伴吧 🔗",
+    "deleteConfirm": "确定要删除这个行程吗？此操作不可撤销。",
+    "deleted": "行程已删除",
+    "tripCount": "{count} 个已保存行程",
+    "emptyTitle": "还没有保存的行程",
+    "emptyDesc": "开始聊天，规划你的第一个行程吧！",
+    "startChatting": "开始聊天",
+    "cities": "城市",
+    "days": "天",
+    "day": "天",
+    "created": "创建于",
+    "backToTrips": "返回行程列表",
+    "tripDetail": "行程详情",
+    "sharedTrip": "分享的行程",
+    "sharedDesc": "有人分享了这个行程给你",
+    "invalidLink": "链接无效或已过期",
+    "invalidLinkDesc": "你点击的分享链接无效或已过期。请索要新的链接。",
+    "saveSharedTrip": "保存此行程",
+    "viewOnMap": "查看地图",
+    "delete": "删除"
+  },
+  "common": {
+    "planTrip": "规划去",
+    "interestedIn": "我想体验中国的{tag}"
+  },
+  "map": {
+    "locations": "{count} 个地点",
+    "locationsPlural": "{count} 个地点",
+    "routeView": "路线视图",
+    "map": "地图",
+    "list": "列表",
+    "fullscreen": "全屏",
+    "exitFullscreen": "退出全屏",
+    "day": "第 {n} 天",
+    "dayShort": "D{n}"
+  },
+  "placeCard": {
+    "save": "收藏",
+    "saved": "已收藏",
+    "addToTrip": "添加到行程",
+    "added": "已添加！",
+    "savedToast": "❤️ {name} 已收藏！",
+    "addedToast": "📋 {name} 已添加到行程！",
+    "viewDetails": "查看详情",
+    "hideDetails": "收起详情",
+    "address": "地址",
+    "duration": "建议时长",
+    "bestTime": "最佳时间"
+  },
+  "itinerary": {
+    "title": "你的行程安排 🐾",
+    "allDays": "所有天",
+    "day": "第 {n} 天",
+    "days": "{count} 天",
+    "daysPlural": "{count} 天",
+    "stops": "{count} 站",
+    "stopsPlural": "{count} 站",
+    "morning": "上午",
+    "afternoon": "下午",
+    "evening": "晚上"
+  },
+  "notFound": {
+    "title": "迷路啦！🐾",
+    "description": "再好的旅行者也会走错路。这个页面不存在 — 但你的中国冒险只需一键之遥。",
+    "backHome": "回到首页",
+    "chatWithToto": "和 Toto 聊聊",
+    "popularPages": "热门页面"
+  },
+  "error": {
+    "title": "哎呀，出了点问题！🐕",
+    "description": "别担心 — 连长城都不是一天建成的。让我们帮你回到正轨。",
+    "tryAgain": "重试",
+    "backHome": "回到首页"
+  }
+}

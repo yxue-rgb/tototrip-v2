@@ -1,0 +1,656 @@
+{
+  "nav": {
+    "home": "Home",
+    "destinations": "Destinations",
+    "inspiration": "Inspiration",
+    "toolkit": "Toolkit",
+    "whyTototrip": "Why TotoTrip",
+    "howItWorks": "How it Works",
+    "myTrips": "My Trips",
+    "locations": "Locations",
+    "login": "Log in",
+    "logout": "Logout",
+    "getStarted": "Get Started",
+    "startPlanning": "Start Planning Free",
+    "chat": "Chat"
+  },
+  "hero": {
+    "badge": "AI-Powered Travel Companion",
+    "titleLine1": "Plan your China trip",
+    "titleLine2": "with AI — ",
+    "titleHighlight": "in minutes",
+    "subtitle": "Payments, trains, VPN, food, language — the stuff that actually trips up foreigners in China. Toto handles it all.",
+    "searchPlaceholder": "Where do you want to go in China? 🐕",
+    "searchButton": "Start Planning Free",
+    "popular": "Popular:"
+  },
+  "quickTags": {
+    "beijing": "Beijing",
+    "shanghai": "Shanghai",
+    "chengdu": "Chengdu",
+    "foodTour": "Food Tour",
+    "historyCulture": "History & Culture",
+    "beijing3d": "Beijing 3 days",
+    "silkRoad": "Silk Road",
+    "chengduFood": "Chengdu Food Tour",
+    "firstTime": "First time in China"
+  },
+  "destinations": {
+    "sectionLabel": "Popular Destinations",
+    "title": "Where Will Your Journey",
+    "titleHighlight": "Take You?",
+    "subtitle": "From ancient capitals to futuristic skylines — every destination comes with a local AI guide.",
+    "viewItineraries": "View curated itineraries",
+    "beijing": {
+      "name": "Beijing",
+      "chinese": "北京",
+      "desc": "Ancient imperial capital with the Great Wall & Forbidden City",
+      "tag": "History & Culture"
+    },
+    "shanghai": {
+      "name": "Shanghai",
+      "chinese": "上海",
+      "desc": "Futuristic skyline meets charming French Concession streets",
+      "tag": "Modern Metropolis"
+    },
+    "chengdu": {
+      "name": "Chengdu",
+      "chinese": "成都",
+      "desc": "Home of giant pandas, fiery hotpot & laid-back tea houses",
+      "tag": "Food & Pandas"
+    },
+    "xian": {
+      "name": "Xi'an",
+      "chinese": "西安",
+      "desc": "Terracotta Warriors, ancient city walls & Silk Road heritage",
+      "tag": "Ancient Capital"
+    },
+    "guilin": {
+      "name": "Guilin",
+      "chinese": "桂林",
+      "desc": "Breathtaking karst peaks rising from the Li River mist",
+      "tag": "Natural Wonder"
+    },
+    "hongkong": {
+      "name": "Hong Kong",
+      "chinese": "香港",
+      "desc": "Dazzling harbour skyline, dim sum & vibrant street markets",
+      "tag": "East Meets West"
+    },
+    "hangzhou": {
+      "name": "Hangzhou",
+      "chinese": "杭州",
+      "desc": "West Lake serenity, Longjing tea culture & China's tech capital",
+      "tag": "Paradise on Earth"
+    },
+    "kunming": {
+      "name": "Kunming",
+      "chinese": "昆明",
+      "desc": "Eternal spring weather, ethnic diversity & gateway to Yunnan",
+      "tag": "Spring City"
+    },
+    "lhasa": {
+      "name": "Lhasa",
+      "chinese": "拉萨",
+      "desc": "Sacred Potala Palace, Tibetan spirituality & the roof of the world",
+      "tag": "Holy City"
+    },
+    "harbin": {
+      "name": "Harbin",
+      "chinese": "哈尔滨",
+      "desc": "World-famous Ice Festival, Russian architecture & winter wonderland",
+      "tag": "Ice City"
+    }
+  },
+  "socialProof": {
+    "sectionLabel": "What We Offer",
+    "title": "Built for ",
+    "titleHighlight": "Real Travelers",
+    "subtitle": "Everything you need to explore China with confidence — from payment setup to local food discovery.",
+    "stats": {
+      "citiesCovered": "Cities Covered",
+      "curatedItineraries": "Curated Itineraries",
+      "poweredByAI": "Powered by AI",
+      "alwaysAvailable": "Always Available"
+    },
+    "testimonials": {
+      "sarah": {
+        "name": "What You Can Do",
+        "from": "Payments & Navigation",
+        "text": "Set up WeChat Pay & Alipay with foreign cards, book high-speed rail tickets, navigate cities without Google Maps, and get real-time help with translations and ordering food."
+      },
+      "marcus": {
+        "name": "How It Works",
+        "from": "AI-Powered Planning",
+        "text": "Tell Toto where you want to go, your interests, and budget. Get a detailed day-by-day itinerary with timing, costs, and insider tips — then refine it through conversation."
+      },
+      "yuki": {
+        "name": "Travel Toolkit",
+        "from": "Practical Guides",
+        "text": "Access comprehensive guides on VPN setup, eSIM recommendations, visa-free entry policies, essential Chinese phrases, and the must-try dishes in every city."
+      }
+    }
+  },
+  "whyTotoTrip": {
+    "sectionLabel": "Why TotoTrip",
+    "title": "China Travel ",
+    "titleHighlight": "Challenges, Solved",
+    "subtitle": "We understand the unique hurdles foreign travelers face in China — and we built an AI that conquers every one.",
+    "painPoints": {
+      "payment": {
+        "title": "WeChat & Alipay Pay Setup",
+        "desc": "Step-by-step guide to set up mobile payment — now open to foreign cards."
+      },
+      "rail": {
+        "title": "High-Speed Rail Booking",
+        "desc": "Book 高铁 tickets with your passport. We'll walk you through 12306 or Trip.com."
+      },
+      "vpn": {
+        "title": "VPN & Internet Access",
+        "desc": "Get connected behind the Great Firewall. eSIM setup + VPN recommendations."
+      },
+      "food": {
+        "title": "Ordering Food Like a Local",
+        "desc": "QR code menus, food vocabulary, dietary restrictions — we've got you covered."
+      },
+      "language": {
+        "title": "Language & Translation",
+        "desc": "Essential phrases, real-time translation help, and cultural communication tips."
+      },
+      "safety": {
+        "title": "Safety & Navigation",
+        "desc": "Emergency contacts, hospital info, and offline navigation without Google Maps."
+      }
+    }
+  },
+  "howItWorks": {
+    "sectionLabel": "How it Works",
+    "title": "Three Steps to ",
+    "titleHighlight": "Your Perfect Trip",
+    "subtitle": "No accounts, no setup. Start chatting in seconds.",
+    "steps": {
+      "step1": {
+        "title": "Tell Us Your Plans",
+        "desc": "Share your destination, dates, interests, and budget. Our AI asks smart follow-up questions to understand exactly what you need."
+      },
+      "step2": {
+        "title": "Get AI-Crafted Itineraries",
+        "desc": "Receive detailed day-by-day plans with timing, costs, transport, and insider tips — all tailored to your style."
+      },
+      "step3": {
+        "title": "Travel with Your AI Companion",
+        "desc": "Use TotoTrip during your trip for real-time help — translations, directions, restaurant ordering, emergency support."
+      }
+    }
+  },
+  "recentSessions": {
+    "title": "Continue Planning",
+    "viewAll": "View All"
+  },
+  "cta": {
+    "badge": "Free to Start",
+    "title": "Ready to Explore",
+    "titleHighlight": "the Real China?",
+    "subtitle": "No signup required. Just tell Toto where you want to go and get a detailed plan in seconds.",
+    "button": "Start Planning Free"
+  },
+  "footer": {
+    "description": "Your AI-powered travel companion for China. Navigate payments, language, and culture — with confidence.",
+    "product": "Product",
+    "cities": "Cities",
+    "company": "Company",
+    "connect": "Connect",
+    "about": "About",
+    "faq": "FAQ",
+    "support": "Support",
+    "helpCenter": "Help Center",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "copyright": "TotoTrip 途图旅行. Made with ❤️ for travelers exploring China.",
+    "allRightsReserved": "All rights reserved."
+  },
+  "chat": {
+    "backToHome": "Back",
+    "aiName": "TotoTrip AI",
+    "savedAuto": "Chat saved automatically",
+    "signInToSave": "Sign in to save chats",
+    "myPlaces": "My Places",
+    "online": "Online",
+    "popularQuestions": "Popular questions",
+    "inputPlaceholder": "Ask me anything about traveling in China…",
+    "inputHint": "Press Enter to send · Shift+Enter for new line · Powered by Gemini AI",
+    "quickActions": {
+      "beijing": "Plan a 5-day Beijing & Shanghai trip",
+      "wechat": "How do I set up WeChat Pay?",
+      "food": "Best street food in Chengdu",
+      "rail": "Help me book high-speed rail tickets",
+      "vpn": "What VPN works best in China?",
+      "phrases": "Essential Chinese phrases for travelers"
+    },
+    "conversations": "Conversations",
+    "newChat": "New Chat",
+    "noConversations": "No conversations yet",
+    "noConversationsHint": "Start a new chat to plan your China adventure",
+    "deleteConfirm": "Delete this conversation?",
+    "loading": "Loading your conversation…",
+    "welcome": {
+      "title": "Welcome to TotoTrip AI",
+      "subtitle": "I'm your personal travel companion for China. Tell me about your trip and I'll help you plan the perfect adventure.",
+      "quickActionBeijing": "Plan a trip to Beijing",
+      "quickActionFood": "Best local food",
+      "quickActionTrain": "Book train tickets",
+      "quickActionWechat": "WeChat Pay setup",
+      "quickActionVisa": "Visa help",
+      "quickActionWeather": "Weather check",
+      "quickActionCurrency": "Currency tips",
+      "quickActionSafety": "Safety tips",
+      "hintWhere": "Where in China do you want to go?",
+      "hintDays": "How many days is your trip?",
+      "hintInterest": "What are you most interested in?"
+    },
+    "copied": "Copied!",
+    "copyMessage": "Copy",
+    "thinking": "Toto is thinking...",
+    "showMore": "Show more",
+    "showLess": "Show less",
+    "retry": "Retry",
+    "refreshPage": "Refresh Page",
+    "errorOffline": "You're offline — check your internet connection and try again.",
+    "errorPersistent": "I'm having trouble connecting. Try refreshing the page or come back in a few minutes.",
+    "errorTemporary": "The AI service is temporarily unavailable. Tap retry to try again.",
+    "sendMessage": "Send message",
+    "errorRateLimit": "You've sent too many messages. Please wait a moment."
+  },
+  "inspiration": {
+    "badge": "Curated Itineraries",
+    "title": "Get Inspired for ",
+    "titleHighlight": "Your China Trip",
+    "subtitle": "Hand-crafted itineraries by China travel experts. Pick one, customize it with our AI, and make it yours.",
+    "viewPlan": "View Plan",
+    "estBudget": "Est. Budget",
+    "allPlans": "All Plans",
+    "overview": "Overview",
+    "tripHighlights": "Trip Highlights",
+    "bestFor": "Best For",
+    "dayByDay": "Day-by-Day Itinerary",
+    "insiderTips": "💡 Insider Tips",
+    "lovePlan": "Love this itinerary?",
+    "lovePlanDesc": "Start a chat with our AI travel advisor and customize it to your preferences, dates, and budget.",
+    "usePlan": "Use This Plan",
+    "customTitle": "Have a different destination in mind?",
+    "customDesc": "Our AI can create a fully custom itinerary for any city in China — just tell it what you want.",
+    "customButton": "Create Custom Itinerary",
+    "createCustom": "Create Custom Itinerary",
+    "cities": "Cities",
+    "duration": "Duration",
+    "budget": "Budget",
+    "bestSeason": "Best Season",
+    "route": "Route:",
+    "highlights": "Highlights",
+    "noTemplates": "No templates found for this theme. Try another!"
+  },
+  "auth": {
+    "title": "TotoTrip",
+    "subtitle": "Your AI Travel Companion for China",
+    "welcomeBack": "Welcome back",
+    "loginDesc": "Login to your account to continue your journey",
+    "createAccount": "Create an account",
+    "signupDesc": "Start planning your China adventure today",
+    "email": "Email",
+    "password": "Password",
+    "fullName": "Full Name",
+    "loginButton": "Login",
+    "loggingIn": "Logging in...",
+    "signupButton": "Sign Up",
+    "creatingAccount": "Creating account...",
+    "orContinueWith": "Or continue with",
+    "continueGoogle": "Continue with Google",
+    "passwordHint": "At least 6 characters",
+    "termsNotice": "By continuing, you agree to our Terms of Service and Privacy Policy",
+    "tabLogin": "Login",
+    "tabSignup": "Sign Up"
+  },
+  "toolkit": {
+    "badge": "Essential Travel Toolkit",
+    "heroTitle": "Everything You Need for",
+    "heroHighlight": "Traveling in China",
+    "heroSubtitle": "The ultimate survival guide for foreign travelers. Payments, internet, transport, food — all the practical info in one place.",
+    "clickToExpand": "Click any section to expand",
+    "expandAll": "Expand All",
+    "collapseAll": "Collapse All",
+    "ctaTitle": "Still have questions?",
+    "ctaSubtitle": "Chat with our AI travel companion for personalized advice on your China trip.",
+    "ctaChat": "Chat with TotoTrip AI",
+    "ctaInspiration": "Browse Itineraries",
+    "homeCta": "📚 Check our Travel Toolkit →",
+    "sections": {
+      "payment": {
+        "title": "Payment Guide",
+        "summary": "WeChat Pay, Alipay setup, cash tips & backup options"
+      },
+      "visa": {
+        "title": "Visa & Entry",
+        "summary": "144-hour transit visa-free, visa-free countries & arrival checklist"
+      },
+      "internet": {
+        "title": "Internet & SIM",
+        "summary": "eSIM recommendations, VPN options & airport connectivity"
+      },
+      "transport": {
+        "title": "Transportation",
+        "summary": "High-speed rail, metro, ride-hailing & airport transfers"
+      },
+      "food": {
+        "title": "Food & Dining",
+        "summary": "Finding restaurants, QR ordering, allergies & must-try dishes"
+      },
+      "language": {
+        "title": "Language",
+        "summary": "Essential phrases, translation apps & common signs"
+      }
+    },
+    "payment": {
+      "mobilePay": {
+        "title": "Setting Up WeChat Pay & Alipay",
+        "desc": "Since 2024, both WeChat Pay and Alipay accept foreign credit/debit cards (Visa, Mastercard, etc.). Here's how to get started:",
+        "step1": "Download WeChat or Alipay from your app store before arriving in China",
+        "step2": "Create an account using your phone number (international numbers work)",
+        "step3": "Go to 'Wallet' → 'Cards' → 'Add a Card' and enter your foreign credit/debit card",
+        "step4": "Complete identity verification with your passport photo",
+        "step5": "Start scanning QR codes to pay! Most merchants display payment codes",
+        "tip": "Alipay's 'Tour Pass' mode is designed specifically for foreign tourists and is often the easiest to set up."
+      },
+      "backup": {
+        "title": "Backup Payment Options",
+        "cash": "Cash (CNY) — Always carry some! ATMs at airports and Bank of China branches accept foreign cards. ¥500-1000 is a good starting amount.",
+        "visa": "Visa/Mastercard — Accepted at international hotels, large malls, and chain restaurants. Not common at small shops or street vendors.",
+        "atm": "ATMs — Look for Bank of China, ICBC, or China Construction Bank. They have English interfaces and accept UnionPay/Visa/Mastercard."
+      },
+      "street": {
+        "title": "Paying at Markets & Street Food",
+        "desc": "Wet markets, street food stalls, and small shops almost exclusively use WeChat/Alipay QR codes. Some may still accept cash but won't have change for large bills.",
+        "tip": "Screenshot the merchant's QR code if your internet is slow — you can still scan and pay from your gallery. Keep ¥10-20 notes for small vendors who only take cash."
+      }
+    },
+    "visa": {
+      "transit": {
+        "title": "144-Hour Transit Visa-Free Policy",
+        "desc": "Citizens from 54 countries can enter China visa-free for up to 144 hours (6 days) when transiting through major cities.",
+        "portsLabel": "Key Ports of Entry",
+        "ports": "Beijing, Shanghai, Guangzhou, Chengdu, Xi'an, Hangzhou, Nanjing, Qingdao, Xiamen, Wuhan, Kunming, and more. 30+ airports and land/sea ports qualify.",
+        "requirementsLabel": "Key Requirements",
+        "requirements": "You must have a confirmed ticket to a third country (not the one you came from). Stay is limited to the designated administrative region."
+      },
+      "visaFree": {
+        "title": "Visa-Free Country List (50+ Countries)",
+        "desc": "As of 2025, China offers visa-free entry for citizens of France, Germany, Italy, Spain, Netherlands, Malaysia, Thailand, Singapore, Australia, New Zealand, and many more — for stays up to 15-30 days depending on nationality.",
+        "tip": "Visa policies change frequently. Always verify the latest policy on your country's embassy website or through TotoTrip AI before traveling."
+      },
+      "arrival": {
+        "title": "After You Arrive",
+        "step1": "Fill out the arrival card on the plane or at immigration (available in English)",
+        "step2": "Register at the local police station within 24 hours — if you stay at a hotel, they do this for you automatically",
+        "step3": "Keep your passport with you at all times — you'll need it for hotel check-in, train tickets, and SIM card purchase",
+        "warning": "The 24-hour registration rule is strictly enforced. If staying at an Airbnb or with friends, you MUST register at the nearest police station yourself."
+      }
+    },
+    "internet": {
+      "esim": {
+        "title": "eSIM — The Easiest Option",
+        "desc": "eSIMs are the most convenient way to stay connected. Buy before you arrive, activate instantly — no physical SIM swap needed.",
+        "airalo": "Airalo — Popular choice, plans from $5/1GB. Easy setup, works in China with data roaming.",
+        "holafly": "Holafly — Unlimited data plans from $19/5 days. Great for heavy users.",
+        "nomad": "Nomad — Affordable China plans with good coverage. 3GB/7 days from $8.",
+        "tip": "Most eSIM plans use roaming, which means they bypass the Great Firewall — you can access Google, Instagram, and WhatsApp without a VPN!"
+      },
+      "vpn": {
+        "title": "VPN for Internet Access",
+        "desc": "Google, YouTube, Instagram, WhatsApp, and many Western apps are blocked in China. If your eSIM doesn't bypass the firewall, you'll need a VPN.",
+        "rec1": "ExpressVPN — Reliable in China, easy to use. Download and set up BEFORE arriving.",
+        "rec2": "Astrill VPN — Known for stable connections in China. Offers StealthVPN protocol.",
+        "rec3": "Surfshark — Budget-friendly option. NoBorders mode designed for restricted networks.",
+        "warning": "Always download and configure your VPN BEFORE entering China. VPN websites and app stores are blocked inside the country."
+      },
+      "airport": {
+        "title": "Airport WiFi & Physical SIM Cards",
+        "desc": "Major airports offer free WiFi (requires phone number verification via SMS). Physical SIM cards can be purchased at China Mobile/Unicom counters in the arrivals hall — bring your passport. Typical tourist plans: 20GB/30 days for ~¥200 ($28)."
+      }
+    },
+    "transport": {
+      "rail": {
+        "title": "High-Speed Rail (高铁)",
+        "desc": "China's HSR network is the world's largest and fastest. Trains reach 350km/h and connect all major cities.",
+        "step1": "Book on Trip.com (English-friendly) or the official 12306 app/website. Trip.com is easier for foreigners.",
+        "step2": "Use your passport number when booking. Pick up tickets at the station with your passport, or use the e-ticket QR code.",
+        "step3": "Arrive 30-45 minutes early. Go through security and ID check, then find your platform.",
+        "tip": "Book popular routes (Beijing↔Shanghai, etc.) 2-3 days in advance. Second class is comfortable and affordable (~$20 for 4.5 hours). First class is ~50% more."
+      },
+      "metro": {
+        "title": "City Metro / Subway",
+        "desc": "Most major Chinese cities have excellent metro systems with English signage. Here's how to ride:",
+        "alipay": "Use Alipay's Transport QR code — works in most cities without buying a ticket. Open Alipay → Transport → select your city.",
+        "card": "Buy a rechargeable transit card (交通卡) at any station for ~¥20 deposit. Works on metro, buses, and sometimes taxis.",
+        "ticket": "Single-journey tokens available at ticket machines (English interface available). Costs ¥3-10 depending on distance."
+      },
+      "taxi": {
+        "title": "Ride-Hailing (DiDi / 滴滴)",
+        "desc": "DiDi is China's Uber. Download the DiDi app (international version available in English). You can pay with foreign credit cards linked through the app.",
+        "tip": "If DiDi isn't working, show the driver your destination in Chinese characters on your phone. Hotel staff can also call taxis for you. Avoid unofficial taxi drivers at airports."
+      },
+      "airport": {
+        "title": "Airport to City Center",
+        "desc": "Every major airport has express metro/train lines, airport buses, and taxi stands. The metro is usually cheapest (¥5-25) and fastest. Airport buses run fixed routes to key areas for ¥20-35. Taxis have regulated meters — expect ¥100-200 to city center."
+      }
+    },
+    "food": {
+      "find": {
+        "title": "Finding Great Restaurants",
+        "desc": "大众点评 (Dianping) is China's Yelp — the #1 app for finding restaurants with ratings, photos, and menus. Download it and use the camera translate feature for Chinese menus.",
+        "tip": "Sort by 好评优先 (best reviews) and look for restaurants with 4.5+ stars. The photo reviews (图片评价) are incredibly helpful for seeing actual dishes."
+      },
+      "order": {
+        "title": "QR Code Ordering (扫码点餐)",
+        "desc": "Most restaurants now use QR code ordering instead of paper menus:",
+        "step1": "Scan the QR code on your table with WeChat or Alipay",
+        "step2": "A digital menu appears — use your phone's translate feature if it's in Chinese",
+        "step3": "Select items, choose quantity and spice level, then submit your order",
+        "step4": "Pay through the same interface. Your food arrives at your table!"
+      },
+      "allergy": {
+        "title": "Dietary Restrictions & Allergies",
+        "desc": "Communication is key for dietary needs. Save these phrases on your phone to show restaurant staff:",
+        "noGluten": "我不能吃麸质 — I can't eat gluten",
+        "noPeanut": "我对花生过敏 — I'm allergic to peanuts",
+        "vegetarian": "我吃素 — I'm vegetarian",
+        "halal": "清真食品 — Halal food"
+      },
+      "mustTry": {
+        "title": "Must-Try Chinese Dishes",
+        "item1": "北京烤鸭 (Peking Duck) — Crispy skin, served with pancakes and hoisin sauce. Try it in Beijing!",
+        "item2": "小笼包 (Xiaolongbao) — Soup dumplings. Best in Shanghai. Careful — they're hot inside!",
+        "item3": "火锅 (Hotpot) — Interactive dining: cook ingredients in a boiling broth. Chengdu style is spicy!",
+        "item4": "兰州拉面 (Lanzhou Hand-Pulled Noodles) — Found everywhere. Fresh noodles pulled to order. ~¥15-25.",
+        "item5": "糖葫芦 (Tanghulu) — Candied fruit on a stick. The perfect street snack!"
+      }
+    },
+    "language": {
+      "phrases": {
+        "title": "Essential Chinese Phrases",
+        "desc": "These 12 phrases will get you through most daily situations. Save this page for quick reference!",
+        "hello": {
+          "cn": "你好",
+          "pinyin": "Nǐ hǎo",
+          "en": "Hello"
+        },
+        "thanks": {
+          "cn": "谢谢",
+          "pinyin": "Xiè xiè",
+          "en": "Thank you"
+        },
+        "sorry": {
+          "cn": "对不起",
+          "pinyin": "Duì bu qǐ",
+          "en": "Sorry / Excuse me"
+        },
+        "howMuch": {
+          "cn": "多少钱？",
+          "pinyin": "Duō shǎo qián?",
+          "en": "How much?"
+        },
+        "where": {
+          "cn": "...在哪里？",
+          "pinyin": "...zài nǎ lǐ?",
+          "en": "Where is...?"
+        },
+        "dontWant": {
+          "cn": "不要",
+          "pinyin": "Bú yào",
+          "en": "I don't want it"
+        },
+        "help": {
+          "cn": "帮帮我",
+          "pinyin": "Bāng bāng wǒ",
+          "en": "Help me"
+        },
+        "check": {
+          "cn": "买单",
+          "pinyin": "Mǎi dān",
+          "en": "Bill please"
+        },
+        "noSpicy": {
+          "cn": "不要辣",
+          "pinyin": "Bú yào là",
+          "en": "Not spicy"
+        },
+        "delicious": {
+          "cn": "好吃！",
+          "pinyin": "Hǎo chī!",
+          "en": "Delicious!"
+        },
+        "toilet": {
+          "cn": "厕所在哪？",
+          "pinyin": "Cè suǒ zài nǎ?",
+          "en": "Where's the toilet?"
+        },
+        "tooExpensive": {
+          "cn": "太贵了",
+          "pinyin": "Tài guì le",
+          "en": "Too expensive"
+        }
+      },
+      "apps": {
+        "title": "Translation Apps",
+        "app1": "Google Translate — Download Chinese offline pack before arriving. Camera mode translates signs and menus instantly.",
+        "app2": "Apple Translate — Built into iPhone. Works offline with downloaded languages. Good for conversations.",
+        "app3": "Pleco — The best Chinese dictionary app. Handwriting recognition, OCR camera, and detailed definitions."
+      },
+      "signs": {
+        "title": "Common Signs You'll See",
+        "exit": {
+          "cn": "出口",
+          "en": "Exit"
+        },
+        "entrance": {
+          "cn": "入口",
+          "en": "Entrance"
+        },
+        "restroom": {
+          "cn": "洗手间",
+          "en": "Restroom"
+        },
+        "noSmoking": {
+          "cn": "禁止吸烟",
+          "en": "No Smoking"
+        },
+        "subway": {
+          "cn": "地铁",
+          "en": "Subway"
+        },
+        "danger": {
+          "cn": "危险",
+          "en": "Danger"
+        }
+      }
+    }
+  },
+  "trips": {
+    "myTrips": "My Trips",
+    "saveTrip": "Save Trip",
+    "saved": "Saved!",
+    "share": "Share",
+    "savedToast": "Trip saved! ✅",
+    "linkCopiedToast": "Link copied! Share it with your travel buddies 🔗",
+    "deleteConfirm": "Are you sure you want to delete this trip? This action cannot be undone.",
+    "deleted": "Trip deleted",
+    "tripCount": "{count} saved trip(s)",
+    "emptyTitle": "No saved trips yet",
+    "emptyDesc": "Start chatting to plan your first trip!",
+    "startChatting": "Start Chatting",
+    "cities": "Cities",
+    "days": "days",
+    "day": "day",
+    "created": "Created",
+    "backToTrips": "Back to Trips",
+    "tripDetail": "Trip Detail",
+    "sharedTrip": "Shared Trip",
+    "sharedDesc": "Someone shared this trip itinerary with you",
+    "invalidLink": "Invalid or expired share link",
+    "invalidLinkDesc": "The share link you followed is invalid or has expired. Please ask for a new link.",
+    "saveSharedTrip": "Save This Trip",
+    "viewOnMap": "View on Map",
+    "delete": "Delete"
+  },
+  "common": {
+    "planTrip": "Plan a trip to",
+    "interestedIn": "I'm interested in a {tag} experience in China"
+  },
+  "map": {
+    "locations": "{count} location",
+    "locationsPlural": "{count} locations",
+    "routeView": "route view",
+    "map": "Map",
+    "list": "List",
+    "fullscreen": "Fullscreen",
+    "exitFullscreen": "Exit fullscreen",
+    "day": "Day {n}",
+    "dayShort": "D{n}"
+  },
+  "placeCard": {
+    "save": "Save",
+    "saved": "Saved",
+    "addToTrip": "Add to Trip",
+    "added": "Added!",
+    "savedToast": "❤️ {name} saved!",
+    "addedToast": "📋 {name} added to trip!",
+    "viewDetails": "View Details",
+    "hideDetails": "Hide Details",
+    "address": "Address",
+    "duration": "Duration",
+    "bestTime": "Best Time"
+  },
+  "itinerary": {
+    "title": "Your Trip Itinerary 🐾",
+    "allDays": "All Days",
+    "day": "Day {n}",
+    "days": "{count} day",
+    "daysPlural": "{count} days",
+    "stops": "{count} stop",
+    "stopsPlural": "{count} stops",
+    "morning": "Morning",
+    "afternoon": "Afternoon",
+    "evening": "Evening"
+  },
+  "notFound": {
+    "title": "Looks like you're lost! 🐾",
+    "description": "Even the best travelers take a wrong turn sometimes. This page doesn't exist — but your China adventure is just a click away.",
+    "backHome": "Back to Home",
+    "chatWithToto": "Chat with Toto",
+    "popularPages": "Popular pages"
+  },
+  "error": {
+    "title": "Oops, something went sideways! 🐕",
+    "description": "Don't worry — even the Great Wall wasn't built without a few hiccups. Let's get you back on track.",
+    "tryAgain": "Try Again",
+    "backHome": "Back to Home"
+  }
+}

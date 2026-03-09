@@ -1,0 +1,5 @@
+.git
+.next/cache
+*.md
+changelog
+brand-assets

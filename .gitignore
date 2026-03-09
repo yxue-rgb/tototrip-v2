@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Next.js
+.next/
+out/
+build/
+
+# Environment
+.env.local
+.env*.local
+
+# System
+.DS_Store
+._*
+
+# Backups (redundant old snapshots)
+v2-backup-pre-brand/
+v2-backup-pre-ux-redesign/
+
+# Misc
+PROJECT_STATUS.md
+*.log
+demo-repository/
+webapp/

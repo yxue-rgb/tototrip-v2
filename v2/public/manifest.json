@@ -1,0 +1,26 @@
+{
+  "name": "toto — The Smart Travel Guide",
+  "short_name": "toto",
+  "description": "Pack light-hearted! Your AI travel buddy for exploring China. Navigate payments, language, and culture with confidence.",
+  "start_url": "/chat",
+  "display": "standalone",
+  "background_color": "#083022",
+  "theme_color": "#083022",
+  "orientation": "portrait-primary",
+  "categories": ["travel", "lifestyle"],
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/brand/window_toto_square.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/brand/window_toto_square.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
