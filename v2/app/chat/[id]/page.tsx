@@ -13,6 +13,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useI18n } from "@/contexts/I18nContext";
 import { Location } from "@/lib/types";
 import type { PlaceData } from "@/lib/parsePlaces";
+import { parseLocationsFromMessage } from "@/lib/parseLocations";
 import { toast } from "sonner";
 import Image from "next/image";
 import dynamic from "next/dynamic";
@@ -83,21 +84,52 @@ export default function ChatPage({ params }: { params: Promise<{ id: string }> }
   }, []);
 
   // Extract locations from messages whenever messages change
+  // Uses BOTH msg.locations (from SSE event) AND client-side parsing of message content
+  // to ensure locations always appear on the map even if the SSE event is missed
   useEffect(() => {
     const locs: Location[] = [];
     const seenIds = new Set<string>();
+
+    const addLocation = (loc: Location) => {
+      if (loc.id && !seenIds.has(loc.id)) {
+        seenIds.add(loc.id);
+        locs.push(loc);
+      }
+    };
+
     for (const msg of messages) {
-      if (msg.role === "assistant" && msg.locations) {
+      if (msg.role !== "assistant") continue;
+
+      // Source 1: locations attached via SSE event (parsed server-side)
+      if (msg.locations) {
         for (const loc of msg.locations) {
-          if (!seenIds.has(loc.id)) {
-            seenIds.add(loc.id);
-            locs.push(loc);
+          addLocation(loc);
+        }
+      }
+
+      // Source 2: parse <LOCATION_DATA> from message content (client-side fallback)
+      // This is the reliable path — works even if the SSE locations event was missed
+      if (msg.content) {
+        try {
+          const { locations: contentLocs } = parseLocationsFromMessage(msg.content);
+          for (const loc of contentLocs) {
+            addLocation(loc);
           }
+        } catch (e) {
+          // Silently skip parse errors during streaming
         }
       }
     }
     console.log('🗺️ ALL LOCATIONS UPDATE:', locs.length, locs.map(l => `${l.name} (${l.latitude},${l.longitude})`));
-    setAllLocations(locs);
+    setAllLocations((prev) => {
+      // Only trigger flyTo if new locations were found that weren't there before
+      const prevIds = new Set(prev.map(l => l.id));
+      const hasNew = locs.some(l => !prevIds.has(l.id));
+      if (hasNew && locs.length > 0) {
+        setFlyToTrigger((t) => t + 1);
+      }
+      return locs;
+    });
   }, [messages]);
 
   // Persist messages to localStorage for guest users

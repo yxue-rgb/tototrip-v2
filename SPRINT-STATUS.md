@@ -1,5 +1,49 @@
 # TotoTrip Sprint Status
 
+## ✅ Sprint v3.9 — Map Location Bug Fix（已完成）
+
+### 完成时间: 2026-03-09 12:15 UTC
+
+### Bug 描述
+地图不显示地点标记。`🗺️ LOCATIONS RECEIVED` 从未触发。
+
+### 根因分析
+
+系统有**两条并行路径**将 locations 送达地图：
+
+1. **Path A — 后端 SSE 事件**：`route.ts` 在流结束后从 `fullText` 中提取 `<LOCATION_DATA>`，发送 `data: {"locations": [...]}` SSE 事件。前端 `page.tsx` 监听 `parsed.locations` 并设置 `msg.locations`。
+2. **Path B — 客户端文本解析**：`MessageList.tsx` 调用 `parseLocationsFromMessage(msg.content)` 从消息文本中解析 `<LOCATION_DATA>`，渲染 `LocationsGrid` 卡片。
+
+**地图的 `allLocations` state（`useEffect`）只使用了 Path A（`msg.locations`）**，完全忽略了 Path B。
+
+当 SSE locations 事件因网络分块、Gemini 响应格式异常、或 JSON 解析失败等原因未送达时，`msg.locations` 为 `undefined`，地图永远空白。而 `LocationsGrid` 卡片可能正常显示（因为它走 Path B 客户端解析）。
+
+### 修复方案
+
+**`app/chat/[id]/page.tsx`** — 双源合并策略：
+
+`useEffect([messages])` 中的 `allLocations` 提取逻辑现在同时使用两个数据源：
+- **Source 1**: `msg.locations`（来自 SSE 事件，服务端解析）
+- **Source 2**: `parseLocationsFromMessage(msg.content)`（客户端从消息文本解析）
+
+两个源的结果用 `seenIds` 去重合并。即使 SSE 事件丢失，客户端解析仍能可靠地将 locations 送达地图。
+
+同时添加了智能 `flyToTrigger`：当检测到新 location ID（之前不在 `allLocations` 中的）时自动触发地图飞行。
+
+### ITINERARY_DATA 检查（T4）
+- `<ITINERARY_DATA>` 不存在同样的问题
+- 后端从未提取/发送 itinerary SSE 事件——itinerary 100% 由客户端 `parseItineraryFromMessage()` 在 `MessageList.tsx` 中解析
+- `<PLACE_DATA>` 同理，100% 客户端解析
+- 只有 `<LOCATION_DATA>` 有双路径不一致问题，已修复
+
+### 修改文件
+- `app/chat/[id]/page.tsx` — 添加 `parseLocationsFromMessage` import + 双源合并 useEffect + 智能 flyToTrigger
+
+### Build 状态
+- ✅ `npx next build` — 零错误通过
+
+---
+
 ## ✅ Sprint v3.8 — Lighthouse Performance Optimization（已完成）
 
 ### 完成时间: 2026-03-09 11:43 UTC
