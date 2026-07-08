@@ -33,9 +33,8 @@ const createSupabaseClient = (): SupabaseClient => {
 };
 
 export const supabase = createSupabaseClient();
-// Temporarily disabled until Supabase project is properly configured
-// Set to true when the Supabase database, auth, and Google OAuth are ready
-export const isSupabaseEnabled = false; // supabaseEnabled && !!supabaseUrl && !!supabaseAnonKey;
+// Supabase persistence enabled when env credentials are configured
+export const isSupabaseEnabled = supabaseEnabled && !!supabaseUrl && !!supabaseAnonKey;
 
 // Type definitions for our database
 export type Database = {
