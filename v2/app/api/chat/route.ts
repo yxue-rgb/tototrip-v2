@@ -8,12 +8,27 @@ export const maxDuration = 60;
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
+// --- Server-side usage logging (fire-and-forget; works for guests too) ---
+import { createHash } from 'crypto';
+const usageClient = (supabaseUrl && supabaseAnonKey)
+  ? createClient(supabaseUrl, supabaseAnonKey, { auth: { persistSession: false, autoRefreshToken: false } })
+  : null;
+
+function logUsage(row: {
+  session_key?: string; user_id?: string | null; provider?: string; model?: string;
+  message_count?: number; chars_in?: number; chars_out?: number; ip_hash?: string; user_agent?: string;
+}) {
+  if (!usageClient) return;
+  usageClient.from('usage_logs').insert({ event: 'chat_request', ...row }).then(({ error }) => {
+    if (error) console.warn('usage_logs insert failed:', error.message);
+  });
+}
+
 // Gemini via OpenAI-compatible endpoint (primary)
-const GEMINI_KEY = process.env.GEMINI_API_KEY || 'AIzaSyD9TJViu1sLP2nIx6Vvn8G97YKYaPgha7I';
-const gemini = new OpenAI({
-  apiKey: GEMINI_KEY,
+const gemini = process.env.GEMINI_API_KEY ? new OpenAI({
+  apiKey: process.env.GEMINI_API_KEY,
   baseURL: 'https://generativelanguage.googleapis.com/v1beta/openai/',
-});
+}) : null;
 
 // DeepSeek client (fallback)
 const deepseek = process.env.DEEPSEEK_API_KEY ? new OpenAI({
@@ -214,7 +229,7 @@ Put ALL structured data tags at the VERY END of your response, AFTER all your co
 - Remember: you're Toto the travel dog — keep the warmth and personality consistent, but never let it overshadow practical helpfulness`;
 
 const MODELS = {
-  gemini: 'gemini-2.5-pro-preview-06-05',
+  gemini: 'gemini-2.5-pro',
   deepseek: 'deepseek-chat',
   groq: 'llama-3.3-70b-versatile',
 };
@@ -268,6 +283,9 @@ export async function POST(req: NextRequest) {
       || req.headers.get('x-real-ip')
       || 'unknown';
 
+    const ipHash = createHash('sha256').update(ip).digest('hex').slice(0, 16);
+    const userAgent = (req.headers.get('user-agent') || '').slice(0, 200);
+
     const rateCheck = checkRateLimit(ip);
     if (!rateCheck.allowed) {
       return new Response(
@@ -297,6 +315,9 @@ export async function POST(req: NextRequest) {
         { status: 400, headers: { 'Content-Type': 'application/json' } }
       );
     }
+
+    const sessionKey: string | undefined = tripContext?.sessionId;
+    const charsIn = messages.reduce((n: number, m: { content: string }) => n + m.content.length, 0);
 
     // Build system prompt with context
     let systemPrompt = SYSTEM_PROMPT;
@@ -381,6 +402,19 @@ export async function POST(req: NextRequest) {
 
           controller.enqueue(encoder.encode('data: [DONE]\n\n'));
           if (!streamClosed) { streamClosed = true; controller.close(); }
+
+          // Record real usage (guests included) — fire-and-forget
+          logUsage({
+            session_key: sessionKey,
+            user_id: user?.id ?? null,
+            provider: usedProvider,
+            model: MODELS[usedProvider as keyof typeof MODELS],
+            message_count: trimmedMessages.length,
+            chars_in: charsIn,
+            chars_out: fullText.length,
+            ip_hash: ipHash,
+            user_agent: userAgent,
+          });
         } catch (error) {
           console.error('Streaming error:', error);
           // Send a graceful error message instead of crashing the stream
