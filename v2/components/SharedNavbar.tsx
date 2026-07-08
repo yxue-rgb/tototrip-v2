@@ -16,18 +16,19 @@ interface SharedNavbarProps {
   activePage?: string;
 }
 
-const NAV_LINKS = [
+const NAV_LINKS: { key: string; href: string; label?: string }[] = [
   { key: "destinations", href: "/#destinations" },
   { key: "inspiration", href: "/inspiration" },
   { key: "guides", href: "/guides" },
   { key: "toolkit", href: "/toolkit" },
+  { key: "pricing", href: "/pricing", label: "Pricing" },
 ];
 
 export function SharedNavbar({ activePage }: SharedNavbarProps) {
   const router = useRouter();
   const { t } = useI18n();
   const { user, logout } = useAuth();
-  const supabaseEnabled = false;
+  const supabaseEnabled = true; // auth re-enabled with restored Supabase backend
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleStartChat = () => {
@@ -67,7 +68,7 @@ export function SharedNavbar({ activePage }: SharedNavbarProps) {
         <nav className="hidden md:flex items-center gap-1" aria-label="Main navigation">
           {NAV_LINKS.map((link) => {
             const isActive = activePage === link.key;
-            const label = t(`nav.${link.key}`);
+            const label = link.label ?? t(`nav.${link.key}`);
             return isActive ? (
               <span
                 key={link.key}
@@ -163,7 +164,7 @@ export function SharedNavbar({ activePage }: SharedNavbarProps) {
             </a>
             {NAV_LINKS.map((link) => {
               const isActive = activePage === link.key;
-              const label = t(`nav.${link.key}`);
+              const label = link.label ?? t(`nav.${link.key}`);
               return isActive ? (
                 <span key={link.key} className="block px-4 py-3 text-sm font-medium text-[#E95331] bg-[#E95331]/10 rounded-xl">
                   {label}
