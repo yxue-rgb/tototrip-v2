@@ -34,6 +34,7 @@ import { ImageWithSkeleton } from "@/components/ImageWithSkeleton";
 import { motion, useInView } from "framer-motion";
 import { useAuth } from "@/contexts/AuthContext";
 import { trackEvent } from "@/lib/analytics";
+import { PricingSection } from "@/components/PricingSection";
 
 interface ChatSession {
   id: string;
@@ -312,6 +313,7 @@ export default function Home() {
               { label: t("nav.inspiration"), href: "/inspiration" },
               { label: t("nav.guides"), href: "/guides" },
               { label: t("nav.toolkit"), href: "/toolkit" },
+              { label: "Pricing", href: "/pricing" },
               { label: t("nav.whyTototrip"), href: "#why-tototrip" },
               { label: t("nav.howItWorks"), href: "#how-it-works" },
             ].map((link) => (
@@ -419,6 +421,7 @@ export default function Home() {
                 { label: t("nav.inspiration"), href: "/inspiration" },
                 { label: t("nav.guides"), href: "/guides" },
                 { label: t("nav.toolkit"), href: "/toolkit" },
+                { label: "Pricing", href: "/pricing" },
                 { label: t("nav.whyTototrip"), href: "#why-tototrip" },
                 { label: t("nav.howItWorks"), href: "#how-it-works" },
               ].map((link) => (
@@ -980,6 +983,9 @@ export default function Home() {
           </div>
         </section>
       )}
+
+      {/* Pricing */}
+      <PricingSection />
 
       {/* ─── CTA Section — "PACK LIGHT-HEARTED" ─── */}
       <section className="py-12 md:py-16 px-4 relative overflow-hidden">
